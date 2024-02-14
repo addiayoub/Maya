@@ -2,14 +2,18 @@ import React from "react";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
 import { getChartType } from "../../utils/Chart/defaultOptions";
+import TradingContainer from "./TradingContainer";
 
 export const Chart = ({ data, type }) => {
   type = getChartType(type);
   if (type === "line") {
     return <LineChart data={data} />;
   }
-  if ((type = "bar")) {
+  if (type === "bar") {
     return <BarChart data={data} />;
+  }
+  if (type === "trading") {
+    return <TradingContainer data={data} />;
   }
   return <LineChart data={data} />;
 };

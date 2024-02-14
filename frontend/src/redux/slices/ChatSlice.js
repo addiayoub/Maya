@@ -1,6 +1,23 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { getChat, getData } from "../actions/ChatActions";
-import { produce } from "immer";
+const initChats = [
+  {
+    isUser: true,
+    data: {
+      content: "salam",
+    },
+  },
+  {
+    isUser: false,
+    data: {
+      content: "salam",
+      // "Veuillez préciser davantage votre demande ou votre question afin que je puisse vous fournir une réponse plus appropriée et vous aider de manière plus efficace.",
+      execution_time: 62,
+      base64Image: null,
+      likedByUser: 0,
+    },
+  },
+];
 const initialState = {
   userInput: "",
   chats: [],

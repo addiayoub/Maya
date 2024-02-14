@@ -6,6 +6,7 @@ import {
   getFullscreenFeature,
 } from "../../utils/Chart/defaultOptions";
 import { formatNumberWithSpaces } from "../../utils/Format/formatNumberWithSpaces";
+import moment from "moment";
 
 const zoomOpts = [
   {
@@ -29,7 +30,7 @@ const getSeries = (data, seriesNames) => {
   }));
 };
 
-const BarChart = ({ data, style }) => {
+const BarChart = ({ data, style, SN, formatDate }) => {
   const chart = useRef(null);
   const myFullscreen = getFullscreenFeature(chart);
   console.log("render BarChart");
@@ -47,8 +48,15 @@ const BarChart = ({ data, style }) => {
     },
   } = defaultOptions;
   const dateKey = Object.keys(data[0])[0];
-  const seances = useMemo(() => data.map((item) => item[dateKey]), [data]);
-  const seriesNames = Object.keys(data[0]).filter((item) => item !== dateKey);
+  const seances = useMemo(
+    () =>
+      data.map((item) =>
+        formatDate ? moment(item[dateKey]).format("DD/MM/YYYY") : item[dateKey]
+      ),
+    [data]
+  );
+  const seriesNames =
+    SN ?? Object.keys(data[0]).filter((item) => item !== dateKey);
   const series = useMemo(() => getSeries(data, seriesNames));
   const baseOptions = useMemo(() => {
     const yAxisValues = data.flatMap((item) =>

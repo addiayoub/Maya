@@ -111,6 +111,7 @@ const LineChart = ({ data, style }) => {
         key={JSON.stringify(baseOptions)}
         style={{
           minHeight: 400,
+          width: "100%",
           ...style,
         }}
         ref={chart}

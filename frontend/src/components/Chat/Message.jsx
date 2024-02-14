@@ -12,6 +12,7 @@ import { handleCopy } from "../../utils/handleCopy";
 import { notyf } from "../../utils/notyf";
 import ModalComponent from "../Ui/ModalComponent";
 import DeleteModal from "../Ui/DeleteModal";
+import { formatBoldText } from "../../utils/formatBoldText";
 
 const DefineRate = ({ value, id }) => {
   const { chats } = useSelector((state) => state.chat);
@@ -52,18 +53,17 @@ const Message = ({
   chartData,
   chartType,
   likedByUser,
+  isLast,
   id,
 }) => {
   const [showChart, setShowChart] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  content = !isUser
-    ? content.replace(/\*\*(.*?)\*\*/g, (_, res) => `<strong>${res}</strong>`)
-    : content;
+  content = !isUser ? formatBoldText(content) : content;
   const dispatch = useDispatch();
   console.log("isLiked", likedByUser);
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    const typingDuration = content.length * 70;
+    const typingDuration = content.length * 60;
     const chartTimeout = setTimeout(() => {
       setShowChart(true);
     }, typingDuration);
@@ -92,11 +92,14 @@ const Message = ({
     setOpenModal(false);
   };
   return (
-    <div className="px-4 py-2 justify-center text-base md:gap-6">
+    <div
+      className="px-4 py-2 justify-center text-base md:gap-6 m-auto"
+      style={{ width: "calc(100% - 100px)" }}
+    >
       <div
         className={`flex flex-1 text-base p-4 gap-3 md:px-5 lg:px-4 xl:px-5  md:py-5 lg:py-4 xl:py-5 md:max-w-3xl group w-full ${
           isUser ? "bg-emerald-100" : "bg-sky-100 "
-        } rounded-[28px]`}
+        } rounded-[28px] m-auto`}
       >
         <div className="flex-shrink-0 flex flex-col relative items-end">
           <div>
@@ -143,47 +146,50 @@ const Message = ({
                   )} */}
                   {/* {isUser ? content : <Typewriter text={content} />} */}
                   {/* {isUser ? content : content} */}
-                  {chartData && chartType !== "trading" && (
-                    <Chart data={chartData} type={chartType} />
-                  )}
-                  <div
+                  {chartData && <Chart data={chartData} type={chartType} />}
+                  {/* <div
                     dangerouslySetInnerHTML={{ __html: content }}
                     className="my-2"
-                  />
+                  /> */}
+                  <div className="my-2">
+                    {isLast ? <Typewriter text={content} /> : content}
+                  </div>
 
-                  {base64Image && chartData && chartType === "trading" && (
+                  {/* {base64Image && chartData && chartType === "trading" && (
                     <img
                       src={`data:image/png;base64,${base64Image}`}
                       alt="chart-image"
                       width="100%"
                       height="600"
                     />
-                  )}
+                  )} */}
 
                   {/* <ThumbsUp fill="green" size={18} />
                   <ThumbsDown fill="red" size={18} /> */}
                   {/* <h3>{id}</h3>
                   <h3>{likedByUser}</h3> */}
 
-                  <div className="flex gap-2 items-center">
-                    {!isUser && (
-                      <Clipboard
-                        onClick={() => handleCopy(content)}
-                        size={22}
-                        className="hover:text-primary cursor-pointer"
-                      />
-                    )}
-                    {(likedByUser || likedByUser === 0) && (
-                      <DefineRate value={likedByUser} id={id} />
-                    )}
-                    {!isUser && (
-                      <Trash
-                        onClick={() => setOpenModal(true)}
-                        size={21}
-                        className="hover:text-error cursor-pointer"
-                      />
-                    )}
-                  </div>
+                  {showChart && (
+                    <div className="flex gap-2 items-center">
+                      {!isUser && (
+                        <Clipboard
+                          onClick={() => handleCopy(content)}
+                          size={22}
+                          className="hover:text-primary cursor-pointer"
+                        />
+                      )}
+                      {(likedByUser || likedByUser === 0) && (
+                        <DefineRate value={likedByUser} id={id} />
+                      )}
+                      {!isUser && (
+                        <Trash
+                          onClick={() => setOpenModal(true)}
+                          size={21}
+                          className="hover:text-error cursor-pointer"
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

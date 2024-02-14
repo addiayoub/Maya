@@ -3,6 +3,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Main.css";
 import ChatBox from "../../Chat/ChatBox.jsx";
 import Header from "../Header/Header.jsx";
+import { Outlet } from "react-router-dom";
 
 const Main = () => {
   return (
@@ -11,7 +12,8 @@ const Main = () => {
       <div id="content">
         <Header />
         <main className="main-container">
-          <ChatBox />
+          {/* <ChatBox /> */}
+          <Outlet></Outlet>
         </main>
       </div>
     </>

@@ -3,7 +3,7 @@ import ReactECharts from "echarts-for-react";
 import {
   defaultOptions,
   getFullscreenFeature,
-} from "../../../utils/chart/defaultOptions";
+} from "../../utils/Chart/defaultOptions";
 import { Box } from "@mui/material";
 
 const initSaveToExcel = {
@@ -13,7 +13,7 @@ const initSaveToExcel = {
 };
 
 const TradingChart = ({ options, style, showSeriesSelector }) => {
-  console.log("options", options, saveToExcel);
+  console.log("options", options);
   const chart = useRef(null);
   const myFullscreen = getFullscreenFeature(chart);
   console.log("render TradingChart");
@@ -38,14 +38,11 @@ const TradingChart = ({ options, style, showSeriesSelector }) => {
     return {
       title: {
         ...(title ?? {}),
-        ...theme.title,
       },
       xAxis: {
         ...(xAxis ?? {}),
         axisLabel: {
           hideOverlap: true,
-          ...xAxis?.axisLabel,
-          ...theme.xAxis.nameTextStyle,
         },
         min: "dataMin",
         max: "dataMax",
@@ -77,7 +74,7 @@ const TradingChart = ({ options, style, showSeriesSelector }) => {
             },
           },
         },
-        selected: selectedLegend,
+        // selected: selectedLegend,
         ...(legend ?? {}),
       },
       grid: {
@@ -113,14 +110,17 @@ const TradingChart = ({ options, style, showSeriesSelector }) => {
       series,
       ...rest,
     };
-  }, [series, selectedLegend, options, theme]);
+  }, [series, options]);
 
   return (
     <Box className="relative">
       <ReactECharts
         option={baseOptions}
         key={JSON.stringify(baseOptions)}
-        style={style}
+        style={{
+          minHeight: "500px",
+          ...style,
+        }}
         ref={chart}
       />
     </Box>

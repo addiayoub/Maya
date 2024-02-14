@@ -10,6 +10,8 @@ import Main from "../components/Layouts/Main/Main";
 import Login from "../Pages/Login";
 import ScrollToTop from "../components/Ui/ScrollToTop";
 import Messages from "../components/Test/Messages";
+import ChatBox from "../components/Chat/ChatBox";
+import Trading from "../components/Charts/Trading";
 
 export default function RouterProvider() {
   return (
@@ -18,8 +20,9 @@ export default function RouterProvider() {
         <ScrollToTop />
         <Routes>
           <Route element={<AuthRoute />}>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<ChatBox />} />
             <Route path="/messages" element={<Messages />} />
+            <Route path="/trading" element={<Trading />} />
           </Route>
           <Route element={<LoginRoute />}>
             <Route element={<Login />} path="/login" />
