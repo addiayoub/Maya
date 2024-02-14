@@ -73,7 +73,7 @@ const Sidebar = () => {
     (state) => state.chat
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredChatsHistory = storedChats.filter((chat) =>
+  const filteredChatsHistory = chatsHistory.filter((chat) =>
     chat.messages.some((message) =>
       message.data.content.toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -104,7 +104,7 @@ const Sidebar = () => {
         .unwrap()
         .then(({ chats }) => {
           // dispatch(setChatsHistory2(chats));
-          console.log("Updated");
+          console.log("chats Updted");
         })
         .catch();
     }
@@ -127,7 +127,7 @@ const Sidebar = () => {
         console.log("get chats", chats);
         const history = chats.map(({ title, _id }) => ({ _id, title }));
         console.log("hist", ...history);
-        dispatch(setChatsHistory(history));
+        dispatch(setChatsHistory(chats));
       })
       .catch()
       .finally(() => setIsLoading(false));
@@ -213,6 +213,9 @@ const Sidebar = () => {
                       value={newTitle}
                       onChange={(e) => setNewTitle(e.target.value)}
                       onBlur={() => handleSaveEdit(id, title)}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && handleSaveEdit(id, title)
+                      }
                       autoFocus
                     />
                   ) : (

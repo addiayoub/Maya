@@ -120,7 +120,7 @@ const Message = ({
         </div>
         <div className="relative flex w-full flex-col ">
           <div className="font-semibold select-none">
-            {isUser ? user.username : `MAYAGPT`}
+            {isUser ? user.username : `MAYA GPT`}
           </div>
           {execution_time && (
             <span className="text-sm my-1">({execution_time}s)</span>

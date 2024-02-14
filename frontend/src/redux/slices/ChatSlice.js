@@ -5,7 +5,7 @@ const initialState = {
   userInput: "",
   chats: [],
   currentChat: null,
-  chatsHistory: [],
+  chatsHistory: JSON.parse(localStorage.getItem("chats")) ?? [],
   data: [],
   getChatLoading: false,
   loading: false,
@@ -65,7 +65,7 @@ const chatSlice = createSlice({
     editChatHistory: (state, { payload }) => {
       const { id, newTitle } = payload;
       state.chatsHistory = state.chatsHistory.map((chat) =>
-        chat.id === id ? { ...chat, title: newTitle } : chat
+        chat._id === id ? { ...chat, title: newTitle } : chat
       );
     },
     clearChatsHistory: (state) => {
@@ -94,8 +94,11 @@ const chatSlice = createSlice({
       state.chatsHistory = payload;
     },
     deleteChatHistory: (state, { payload }) => {
-      const history = state.chatsHistory.filter((chat) => chat.id !== payload);
+      const { chatsHistory } = current(state);
+      console.log("current history", chatsHistory, payload);
+      const history = chatsHistory.filter((chat) => chat._id !== payload);
       state.chatsHistory = history;
+      console.log("current history after", chatsHistory, history);
     },
   },
   extraReducers: (builder) => {

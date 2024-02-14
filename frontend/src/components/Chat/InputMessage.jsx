@@ -52,7 +52,7 @@ const InputMessage = () => {
             rows="1"
             onKeyDown={handleKeyDown}
             value={userInput}
-            placeholder="Message MAYAGPT…"
+            placeholder="Message MAYA GPT..."
             className="m-0 w-full resize-none border-0 bg-transparent py-[10px] pr-10  dark:bg-transparent md:py-3.5 md:pr-12 placeholder-black/50 dark:placeholder-white/50 pl-3 md:pl-4"
             // style={{ maxHeight: "200px", height: "652px" }}
           ></textarea>
