@@ -123,7 +123,7 @@ const Message = ({
         </div>
         <div className="relative flex w-full flex-col ">
           <div className="font-semibold select-none">
-            {isUser ? user.username : `MAYA GPT`}
+            {isUser ? user.name : `MAYA GPT`}
           </div>
           {execution_time && (
             <span className="text-sm my-1">({execution_time}s)</span>
@@ -167,7 +167,7 @@ const Message = ({
                   {/* <ThumbsUp fill="green" size={18} />
                   <ThumbsDown fill="red" size={18} /> */}
                   {/* <h3>{id}</h3>
-                  <h3>{likedByUser}</h3> */}
+                  <h3>{likedBuUser}</h3> */}
 
                   {showChart && (
                     <div className="flex gap-2 items-center">
