@@ -1,0 +1,50 @@
+#content {
+  position: relative;
+  width: calc(100% - 260px);
+  left: 260px;
+  transition: all 0.3s ease;
+}
+
+#sidebar.hide ~ #content {
+  width: calc(100%);
+  left: 0;
+}
+
+.main-container {
+  overflow: hidden;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  padding: 24px 20px 20px;
+  position: relative;
+}
+
+.main-container .toggle-sidebar {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 22;
+  cursor: pointer;
+}
+.main-container .scroll-top-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 100px;
+  z-index: 100;
+  background-color: var(--primary-color);
+  color: #fff;
+  transition: 0.3s;
+}
+.main-container .scroll-top-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+@media screen and (max-width: 992px) {
+  #content {
+    position: relative;
+    left: 0;
+    width: calc(100%);
+    transition: all 0.3s ease;
+  }
+}

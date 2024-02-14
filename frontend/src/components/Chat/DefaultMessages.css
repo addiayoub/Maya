@@ -1,0 +1,19 @@
+.message {
+  position: relative;
+}
+
+.copy-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: none;
+  transition: all 0.3s;
+  margin: 5px;
+}
+.copy-icon:hover {
+  color: var(--primary-color);
+}
+
+.message:hover .copy-icon {
+  display: inline !important;
+}

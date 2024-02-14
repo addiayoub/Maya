@@ -1,0 +1,18 @@
+export const MESSAGES = [
+  "bonjour",
+  "Quelles sont les fonctionnalités que tu propose",
+  "Quels types d'informations et de résumés MAYA offre-t-elle pour suivre l'évolution des marchés, et sur quels marchés spécifiques se concentre-t-elle?",
+  "Que s'est il passé dans le Marché action, le marche de la gestion d'actifs et le marche des taux  la semaine derniere",
+  "Peux tu me fournir une synthèse des événements marquants survenus la semaine dernière , concernant le marché des changes, le marché monétaire, le marché des adjudications, l'inflation, les taux d'intérêt, les indicateurs boursiers, les agrégats monétaires et de crédit, les finances publiques, ainsi que les comptes extérieurs ?",
+  "Peux tu me donner une synthèse des principaux indicateurs macroéconomiques marocain",
+  "Pouvez-vous fournir un graphique qui présente l'évolution historique des résultats nets de IAM, ATW et BCP ?",
+  "Historique de cours base 100 du  adh, cih et iam sur 2023",
+  "Historique de valeur  des principaux indices financiers, tels que le MASI, le MASI RENTABILITE BRUTE et le MBI Global",
+  "Graphique qui présente l'évolution historique des performances ytd de ATTAKAFOUL, CIH ACTIONS",
+  "Graphique présentant l'historique vl base 100 de RMA EQUITY  sur 2023",
+  "et l'évolution historique du Ratio de sharpe",
+  "Pouvez-vous me fournir des indicateurs chartistes pour l'action de Cosumar en date du 02 Fév 2024 ?",
+  "Qu’en est-il des indicateurs statistiques ?",
+  "Peux tu me fournir un aperçu actuel du marché boursier marocain en précisant la date et l'heure de la cotation",
+  "Quelles actions enregistrent actuellement les volumes de transaction les plus importants?",
+];
