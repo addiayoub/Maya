@@ -58,15 +58,9 @@ button {
   background-color: #fff;
 }
 .right-chat {
-  background-color: #4caf50; /* Green background for right chat */
-  color: white;
-  border-radius: 10px 10px 0 10px; /* Rounded borders on the right side */
   align-self: flex-end; /* Move chat to the right */
 }
 
 .left-chat {
-  background-color: #008cba; /* Blue background for left chat */
-  color: white;
-  border-radius: 10px 10px 10px 0; /* Rounded borders on the left side */
   align-self: flex-start; /* Move chat to the left */
 }

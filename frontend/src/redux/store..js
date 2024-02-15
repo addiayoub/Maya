@@ -4,6 +4,7 @@ import AuthReducer from "./slices/AuthSlice";
 import LayoutReducer from "./slices/LayoutSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import authMiddleware from "./middleware/AuthMiddleware";
 
 // const chatsPersistConfig = {
 //   key: "chats",
@@ -39,7 +40,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(authMiddleware),
 });
 
 export const persistor = persistStore(store);

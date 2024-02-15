@@ -10,7 +10,8 @@ const initChats = [
   {
     isUser: false,
     data: {
-      content: "salam",
+      content:
+        "Bonjour à nouveau ! Si vous avez des questions concernant les marchés financiers, je suis là pour vous aider. N'hésitez pas à les poser.",
       // "Veuillez préciser davantage votre demande ou votre question afin que je puisse vous fournir une réponse plus appropriée et vous aider de manière plus efficace.",
       execution_time: 62,
       base64Image: null,
@@ -20,13 +21,14 @@ const initChats = [
 ];
 const initialState = {
   userInput: "",
-  chats: [],
+  chats: initChats,
   currentChat: null,
   chatsHistory: JSON.parse(localStorage.getItem("chats")) ?? [],
   data: [],
   getChatLoading: false,
   loading: false,
   error: null,
+  lastMsgId: null,
   prevMessages: {
     messages: [],
     messages_categorie: [],
@@ -36,6 +38,9 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
+    resetLastMsgId: (state) => {
+      state.lastMsgId = null;
+    },
     setUserInput: (state, { payload }) => {
       state.userInput = payload;
     },
@@ -125,6 +130,7 @@ const chatSlice = createSlice({
     builder.addCase(getData.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.data = [...state.data, payload];
+      state.lastMsgId = payload._id;
       state.prevMessages = payload.prevMessages;
     });
     builder.addCase(getData.rejected, (state, payload) => {
@@ -158,6 +164,7 @@ export const {
   clearChatsHistory,
   handleLikeDislike,
   deleteChat,
+  resetLastMsgId,
   editChatHistory,
 } = chatSlice.actions;
 export default chatSlice.reducer;

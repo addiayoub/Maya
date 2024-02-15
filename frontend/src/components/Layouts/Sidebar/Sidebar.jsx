@@ -14,6 +14,7 @@ import {
   setChatsHistory2,
   setCurrentChat,
   editChatHistory,
+  resetLastMsgId,
 } from "../../../redux/slices/ChatSlice";
 import {
   createChat,
@@ -159,6 +160,7 @@ const Sidebar = () => {
   };
   const handleGetChat = (id) => {
     console.log("Current", currentChat);
+    dispatch(resetLastMsgId());
     if (!editingChatId && currentChat !== id) {
       dispatch(newChat());
       dispatch(setCurrentChat(id));

@@ -11,7 +11,7 @@ const Typewriter = ({ text }) => {
       setIndex((prevIndex) =>
         prevIndex < text.length ? prevIndex + 1 : prevIndex
       );
-    }, 50);
+    }, 30);
 
     return () => {
       clearInterval(typingInterval);

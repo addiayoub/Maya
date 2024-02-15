@@ -92,51 +92,58 @@ const Message = ({
     setOpenModal(false);
   };
   return (
-    <div
-      className="px-4 py-2 justify-center text-base md:gap-6 m-auto"
-      style={{ width: "calc(100% - 100px)" }}
-    >
+    <>
       <div
-        className={`flex flex-1 text-base p-4 gap-3 md:px-5 lg:px-4 xl:px-5  md:py-5 lg:py-4 xl:py-5 md:max-w-3xl group w-full ${
-          isUser ? "bg-emerald-100" : "bg-sky-100 "
-        } rounded-[28px] m-auto`}
+        // className="px-4 py-2 justify-center text-base md:gap-6 m-auto"
+        // style={{ width: "calc(100% - 100px)" }}
+        className={`px-4 py-2 justify-center text-base md:gap-6 max-w-[70%] w-[70%] ${
+          isUser ? "self-start" : "self-end"
+        }`}
       >
-        <div className="flex-shrink-0 flex flex-col relative items-end">
-          <div>
-            <div className="pt-0.5">
-              <div className="gizmo-shadow-stroke flex h-6 w-6 items-center justify-center overflow-hidden rounded-full">
-                <div className="relative flex">
-                  <img
-                    alt="User"
-                    loading="lazy"
-                    width="24"
-                    height="24"
-                    decoding="async"
-                    data-nimg="1"
-                    className="rounded-sm"
-                    src={isUser ? Avatar : MiniLogo}
-                  />
+        <div
+          // className={`flex flex-1 text-base p-4 gap-3 md:px-5 lg:px-4 xl:px-5  md:py-5 lg:py-4 xl:py-5 md:max-w-3xl group w-full ${
+          //   isUser ? "bg-emerald-100 left-chat" : "bg-sky-100 right-chat"
+          // } rounded-[28px] m-auto`}
+          className={`flex flex-1 text-base mx-auto p-4 gap-3 md:px-5 lg:px-1 xl:px-5  rounded-[28px] group ${
+            isUser ? "bg-emerald-100 self-start" : "bg-sky-100"
+          }`}
+        >
+          <div className="flex-shrink-0 flex flex-col relative items-end">
+            <div>
+              <div className="pt-0.5">
+                <div className="gizmo-shadow-stroke flex h-6 w-6 items-center justify-center overflow-hidden rounded-full">
+                  <div className="relative flex">
+                    <img
+                      alt="User"
+                      loading="lazy"
+                      width="24"
+                      height="24"
+                      decoding="async"
+                      data-nimg="1"
+                      className="rounded-sm"
+                      src={isUser ? Avatar : MiniLogo}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="relative flex w-full flex-col ">
-          <div className="font-semibold select-none">
-            {isUser ? user.name : `MAYA GPT`}
-          </div>
-          {execution_time && (
-            <span className="text-sm my-1">({execution_time}s)</span>
-          )}
-          <div className="flex-col gap-1 md:gap-3">
-            <div className="flex flex-grow flex-col max-w-full">
-              <div
-                // data-message-author-role="user"
-                // data-message-id="aaa202f4-b8bf-456c-9cbb-b327cd1137fc"
-                className="min-h-[20px] text-message flex flex-col items-start gap-3 whitespace-pre-wrap break-words [.text-message+&amp;]:mt-5 overflow-x-auto"
-              >
-                <div className="">
-                  {/* {base64Image && (
+          <div className="relative flex w-full flex-col ">
+            <div className="font-semibold select-none">
+              {isUser ? user.username : `MAYA GPT`}
+            </div>
+            {execution_time && (
+              <span className="text-sm my-1">({execution_time}s)</span>
+            )}
+            <div className="flex-col gap-1 md:gap-3">
+              <div className="flex flex-grow flex-col max-w-full">
+                <div
+                  // data-message-author-role="user"
+                  // data-message-id="aaa202f4-b8bf-456c-9cbb-b327cd1137fc"
+                  className="min-h-[20px] text-message flex flex-col items-start gap-3 whitespace-pre-wrap break-words [.text-message+&amp;]:mt-5 overflow-x-auto"
+                >
+                  <div className="">
+                    {/* {base64Image && (
                     <img
                       src={`data:image/png;base64,${base64Image}`}
                       alt="Base64 Image"
@@ -144,18 +151,18 @@ const Message = ({
                       height: '600'
                     />
                   )} */}
-                  {/* {isUser ? content : <Typewriter text={content} />} */}
-                  {/* {isUser ? content : content} */}
-                  {chartData && <Chart data={chartData} type={chartType} />}
-                  {/* <div
+                    {/* {isUser ? content : <Typewriter text={content} />} */}
+                    {/* {isUser ? content : content} */}
+                    {chartData && <Chart data={chartData} type={chartType} />}
+                    {/* <div
                     dangerouslySetInnerHTML={{ __html: content }}
                     className="my-2"
                   /> */}
-                  <div className="my-2">
-                    {isLast ? <Typewriter text={content} /> : content}
-                  </div>
+                    <div className="my-2">
+                      {isLast ? <Typewriter text={content} /> : content}
+                    </div>
 
-                  {/* {base64Image && chartData && chartType === "trading" && (
+                    {/* {base64Image && chartData && chartType === "trading" && (
                     <img
                       src={`data:image/png;base64,${base64Image}`}
                       alt="chart-image"
@@ -164,32 +171,33 @@ const Message = ({
                     />
                   )} */}
 
-                  {/* <ThumbsUp fill="green" size={18} />
+                    {/* <ThumbsUp fill="green" size={18} />
                   <ThumbsDown fill="red" size={18} /> */}
-                  {/* <h3>{id}</h3>
+                    {/* <h3>{id}</h3>
                   <h3>{likedBuUser}</h3> */}
 
-                  {showChart && (
-                    <div className="flex gap-2 items-center">
-                      {!isUser && (
-                        <Clipboard
-                          onClick={() => handleCopy(content)}
-                          size={22}
-                          className="hover:text-primary cursor-pointer"
-                        />
-                      )}
-                      {(likedByUser || likedByUser === 0) && (
-                        <DefineRate value={likedByUser} id={id} />
-                      )}
-                      {!isUser && (
-                        <Trash
-                          onClick={() => setOpenModal(true)}
-                          size={21}
-                          className="hover:text-error cursor-pointer"
-                        />
-                      )}
-                    </div>
-                  )}
+                    {showChart && (
+                      <div className="flex gap-2 items-center">
+                        {!isUser && (
+                          <Clipboard
+                            onClick={() => handleCopy(content)}
+                            size={22}
+                            className="hover:text-primary cursor-pointer"
+                          />
+                        )}
+                        {(likedByUser || likedByUser === 0) && (
+                          <DefineRate value={likedByUser} id={id} />
+                        )}
+                        {!isUser && (
+                          <Trash
+                            onClick={() => setOpenModal(true)}
+                            size={21}
+                            className="hover:text-error cursor-pointer"
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -202,7 +210,7 @@ const Message = ({
           // handleDelete={handleDeleteChat}
         />
       </ModalComponent>
-    </div>
+    </>
   );
 };
 
