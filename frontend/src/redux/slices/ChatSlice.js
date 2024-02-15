@@ -21,7 +21,7 @@ const initChats = [
 ];
 const initialState = {
   userInput: "",
-  chats: initChats,
+  chats: [],
   currentChat: null,
   chatsHistory: JSON.parse(localStorage.getItem("chats")) ?? [],
   data: [],
