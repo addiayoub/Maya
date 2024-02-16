@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserInput } from "../../redux/slices/ChatSlice";
 import useHandleGenerate from "../../Hooks/useHandleGenerate";
@@ -48,7 +48,7 @@ const DefaultMessages = ({ messages }) => {
   return (
     <div
       className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12
-        xl:grid-cols-12 gap-y-4 gap-x-4 items-stretch overflow-y-auto"
+        xl:grid-cols-12 gap-y-4 gap-x-4 items-stretch overflow-y-auto max-h-[300px]"
     >
       {messages.map((msg, index) => {
         return (
@@ -78,4 +78,4 @@ const DefaultMessages = ({ messages }) => {
   );
 };
 
-export default DefaultMessages;
+export default memo(DefaultMessages);

@@ -114,7 +114,7 @@ class _UserController {
     const chat = loggedInUser.chats.find(
       (chat) => chat._id.toString() == chatId
     );
-    console.log("chat is:", chat);
+    console.log("chat is:", new Date());
 
     if (!chat) {
       return res

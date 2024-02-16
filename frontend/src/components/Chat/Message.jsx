@@ -4,46 +4,15 @@ import Typewriter from "../Typewriter";
 import { useDispatch, useSelector } from "react-redux";
 import MiniLogo from "../../assets/images/mini-logo.png";
 import Avatar from "../../assets/images/avatar.png";
-import { Clipboard, Heart, ThumbsDown, ThumbsUp, Trash } from "react-feather";
-import { IconButton } from "@mui/material";
-import { deleteChat, handleLikeDislike } from "../../redux/slices/ChatSlice";
-import { deleteMsg, likeDislikeChat } from "../../redux/actions/ChatActions";
+import { Clipboard, Trash } from "react-feather";
+import { deleteChat } from "../../redux/slices/ChatSlice";
+import { deleteMsg } from "../../redux/actions/ChatActions";
 import { handleCopy } from "../../utils/handleCopy";
 import { notyf } from "../../utils/notyf";
 import ModalComponent from "../Ui/ModalComponent";
 import DeleteModal from "../Ui/DeleteModal";
 import { formatBoldText } from "../../utils/formatBoldText";
-
-const DefineRate = ({ value, id }) => {
-  const { chats } = useSelector((state) => state.chat);
-  console.log("your chats", chats);
-  console.log("rateValue is", value);
-  const dispatch = useDispatch();
-  const handleClick = (value) => {
-    dispatch(handleLikeDislike({ id, value }));
-    dispatch(likeDislikeChat({ msgId: id, value }));
-  };
-  return (
-    <div className="flex gap-3 m-1 items-center">
-      <ThumbsUp
-        size={21}
-        // color={value === 1 ? "green" : "currentColor"}
-        className={`cursor-pointer text-success hover:text-gray hover:fill-success  hover:scale-110 ${
-          value === 1 ? "fill-success" : ""
-        }`}
-        onClick={() => handleClick(1)}
-      />
-      <ThumbsDown
-        size={21}
-        className={`cursor-pointer text-error hover:text-gray hover:fill-error  hover:scale-110 ${
-          value === -1 ? "fill-error" : ""
-        }`}
-        // color={value === -1 ? "red" : "currentColor"}
-        onClick={() => handleClick(-1)}
-      />
-    </div>
-  );
-};
+import RatingButtons from "./RatingButtons";
 
 const Message = ({
   isUser,
@@ -63,7 +32,7 @@ const Message = ({
   console.log("isLiked", likedByUser);
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    const typingDuration = content.length * 60;
+    const typingDuration = content.length * 30;
     const chartTimeout = setTimeout(() => {
       setShowChart(true);
     }, typingDuration);
@@ -176,7 +145,7 @@ const Message = ({
                     {/* <h3>{id}</h3>
                   <h3>{likedBuUser}</h3> */}
 
-                    {showChart && (
+                    {(!isLast || showChart) && (
                       <div className="flex gap-2 items-center">
                         {!isUser && (
                           <Clipboard
@@ -186,7 +155,7 @@ const Message = ({
                           />
                         )}
                         {(likedByUser || likedByUser === 0) && (
-                          <DefineRate value={likedByUser} id={id} />
+                          <RatingButtons value={likedByUser} id={id} />
                         )}
                         {!isUser && (
                           <Trash

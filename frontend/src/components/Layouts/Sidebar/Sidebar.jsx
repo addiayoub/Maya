@@ -23,64 +23,48 @@ import {
   getChat,
   getChats,
 } from "../../../redux/actions/ChatActions";
+import { toggleSidebar } from "../../../redux/slices/LayoutSlice";
 import { notyf } from "../../../utils/notyf";
 import Dropdown from "../../Test/DropDown";
 import ModalComponent from "../../Ui/ModalComponent";
 import DeleteModal from "../../Ui/DeleteModal";
 import SidebarLoader from "../../Loaders/SidebarLoader";
-
-const DropDownMenu = ({ id, title, handleEditClick, handleDeleteChat }) => {
-  return (
-    <div className="py-3.5 px-2.5 flex flex-col gap-4 text-sm ">
-      <div
-        className="flex flex-wrap gap-3 hover:bg-gray-100 rounded-md p-2.5"
-        onClick={(e) => {
-          e.stopPropagation();
-          console.log("div clicked");
-          handleEditClick(id, title);
-        }}
-      >
-        <Edit
-          color="var(--primary-color)"
-          size={16}
-          onClick={(e) => {
-            e.stopPropagation();
-            console.log("div clicked");
-            // handleEditClick(id, title);
-          }}
-        />
-        <span>Renommer</span>
-      </div>
-
-      <div
-        className="flex flex-wrap gap-3 hover:bg-gray-100 rounded-md p-2.5"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleDeleteChat(id);
-        }}
-      >
-        <Trash color="var(--error-color)" size={16} />
-        <span className="text-error">Supprimer</span>
-      </div>
-    </div>
-  );
-};
+import DropDownMenu from "./DropDownMenu";
 
 const Sidebar = () => {
-  const { user } = useSelector((state) => state.auth);
   const { isOpen } = useSelector((state) => state.layout);
-  const storedChats = JSON.parse(localStorage.getItem("chats")) ?? [];
   const { chatsHistory, chats, currentChat } = useSelector(
     (state) => state.chat
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredChatsHistory = chatsHistory.filter((chat) =>
-    chat.messages.some((message) =>
-      message.data.content.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+  const filteredChatsHistory = chatsHistory.filter((chat) => {
+    return (
+      chat.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      chat.messages.some((message) =>
+        message.data.content.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+  });
 
-  console.log("Chats", chats);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const shouldHideSidebar = windowWidth < 992;
+  useEffect(() => {
+    if (shouldHideSidebar) {
+      dispatch(toggleSidebar(false));
+    } else {
+      dispatch(toggleSidebar(true));
+    }
+  }, [shouldHideSidebar]);
 
   const displayChatsHistory = searchTerm ? filteredChatsHistory : chatsHistory;
   const [openModal, setOpenModal] = useState(false);
@@ -92,8 +76,7 @@ const Sidebar = () => {
     setNewTitle(newTitle);
     setEditingChatId(id);
   };
-  console.log("chatsHistory", chatsHistory);
-  console.log("Chats from storage", JSON.parse(localStorage.getItem("chats")));
+
   const handleSaveEdit = (id, oldTitle) => {
     // Implement logic to save the edited title, e.g., through an API call
     // Once saved, reset editing state
@@ -150,6 +133,7 @@ const Sidebar = () => {
           if (currentChat === deleteChatId) {
             console.log("Chats after delete", chats);
             dispatch(newChat());
+            localStorage.setItem("currentChats", JSON.stringify([]));
           }
         })
         .catch()
@@ -161,14 +145,17 @@ const Sidebar = () => {
   const handleGetChat = (id) => {
     console.log("Current", currentChat);
     dispatch(resetLastMsgId());
+    console.log("GetLocal Chats", JSON.parse(localStorage.getItem("chats")));
     if (!editingChatId && currentChat !== id) {
       dispatch(newChat());
       dispatch(setCurrentChat(id));
+      localStorage.setItem("currentChatId", id);
       dispatch(getChat({ id }))
         .unwrap()
         .then(({ chat: { messages } }) => {
           console.log("getChat success", messages);
           dispatch(setChats(messages));
+          localStorage.setItem("currentChats", JSON.stringify(messages));
         })
         .catch();
     }

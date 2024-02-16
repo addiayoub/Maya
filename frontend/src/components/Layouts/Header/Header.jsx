@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/material";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../../redux/slices/AuthSlice";
@@ -82,4 +82,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);

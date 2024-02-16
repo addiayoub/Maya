@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 export const obj = [
   {
     Questions: "5 titres recomendés a l'achat",
@@ -1408,3 +1410,15 @@ export const obj = [
     Questions: "une synthèse sur l'inflation au maroc en mois 08 2023",
   },
 ];
+const chatModel = {
+  id: String,
+  content: Object,
+  messages: Array,
+  isUser: Boolean,
+  data: Object,
+};
+
+const { chats } = useSelector((state) => state.chat);
+const addChats = (state, { payload }) => {
+  state.chats = [...state.chats, payload];
+};

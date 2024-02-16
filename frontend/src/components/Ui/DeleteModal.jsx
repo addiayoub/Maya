@@ -9,7 +9,8 @@ const DeleteModal = ({
   handleDelete,
 }) => {
   return (
-    <div className="rounded-md md:max-w-md md:mx-auto fixed inset-x-0 bottom-0 z-50 md:relative">
+    // rounded-md md:max-w-md md:mx-auto fixed inset-x-0 bottom-0 z-50 md:relative
+    <div className="">
       <div className="md:flex items-center">
         <div
           className="rounded-full flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto"

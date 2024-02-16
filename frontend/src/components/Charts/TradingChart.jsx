@@ -119,6 +119,7 @@ const TradingChart = ({ options, style, showSeriesSelector }) => {
         key={JSON.stringify(baseOptions)}
         style={{
           minHeight: "500px",
+          width: "100%",
           ...style,
         }}
         ref={chart}

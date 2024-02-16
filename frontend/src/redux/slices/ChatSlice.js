@@ -21,8 +21,8 @@ const initChats = [
 ];
 const initialState = {
   userInput: "",
-  chats: [],
-  currentChat: null,
+  chats: JSON.parse(localStorage.getItem("currentChats")) ?? [],
+  currentChat: localStorage.getItem("currentChatId") ?? null,
   chatsHistory: JSON.parse(localStorage.getItem("chats")) ?? [],
   data: [],
   getChatLoading: false,
@@ -46,6 +46,7 @@ const chatSlice = createSlice({
     },
     setChat: (state, { payload }) => {
       state.chats = [...state.chats, payload];
+      localStorage.setItem("currentChats", JSON.stringify(state.chats));
     },
     deleteChat: (state, { payload }) => {
       const { chats } = current(state);
@@ -66,6 +67,7 @@ const chatSlice = createSlice({
         }
       }
       console.log("state.chats", chats, payload);
+      localStorage.setItem("currentChats", JSON.stringify(state.chats));
       // state.chats = [...state.chats, payload];
     },
     setChats: (state, { payload }) => {
@@ -76,6 +78,8 @@ const chatSlice = createSlice({
     },
     newChat: (state) => {
       state.chats = [];
+      localStorage.setItem("currentChats", JSON.stringify([]));
+      localStorage.setItem("currentChatId", null);
     },
     setCurrentChat: (state, { payload }) => {
       state.currentChat = payload;
@@ -110,6 +114,7 @@ const chatSlice = createSlice({
           },
         };
       }
+      localStorage.setItem("currentChats", JSON.stringify(state.chats));
     },
     setChatsHistory2: (state, { payload }) => {
       const history = [...payload, ...state.chatsHistory];

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { MoreHorizontal } from "react-feather";
 
 const defaultTrigger = (
@@ -56,4 +56,4 @@ const Dropdown = ({ trigger = defaultTrigger, children }) => {
   );
 };
 
-export default Dropdown;
+export default memo(Dropdown);

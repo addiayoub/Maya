@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import Message from "./Message";
 import { useSelector } from "react-redux";
 const Messages = () => {
@@ -6,7 +6,10 @@ const Messages = () => {
   console.log("lastMsgId", lastMsgId);
   const lastMsg = useRef(null);
   useEffect(() => {
-    lastMsg?.current?.scrollIntoView();
+    // Scroll to the last message when component updates
+    if (lastMsg.current) {
+      lastMsg?.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [chats]);
   return (
     // <div className="flex-1 flex flex-col self-start w-full my-2 overflow-auto">
@@ -53,4 +56,4 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default memo(Messages);

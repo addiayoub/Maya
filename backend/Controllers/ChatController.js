@@ -5,6 +5,7 @@ class _ChatController {
   async index(req, res) {
     try {
       const { user } = req;
+      console.log(new Date());
       const currentUser = await User.findById(user._id);
       const chats = currentUser.chats.reverse();
       return res.json({ chats });
@@ -17,6 +18,7 @@ class _ChatController {
     try {
       const { user } = req;
       const { title } = req.body;
+      console.log(new Date());
       const updatedUser = await User.findByIdAndUpdate(
         user._id,
         {
@@ -39,6 +41,7 @@ class _ChatController {
     try {
       const { user } = req;
       const { id } = req.query;
+      console.log(new Date());
       const currentUser = await User.findByIdAndUpdate(user._id);
       const chat = currentUser.chats.find((chat) => chat._id.toString() === id);
       return res.json({ chat });
@@ -65,6 +68,7 @@ class _ChatController {
       const { user } = req;
       const { id } = req.query;
       const currentUser = await User.findById(user._id);
+      console.log(new Date());
       if (!currentUser) {
         return res.status(404).json({ message: "Utilisateur non trouvé." });
       }
@@ -100,14 +104,13 @@ class _ChatController {
     try {
       const { user } = req;
       const { id, newTitle } = req.body;
-      console.log("edit chat id", id, req.body);
+      console.log("edit chat id", id, req.body, new Date());
       const currentUser = await User.findById(user._id);
       if (!currentUser) {
         return res.status(404).json({ message: "Utilisateur non trouvé." });
       }
       // Find the index of the chat in the user's chats array
       const chatIndex = currentUser.chats.findIndex((chat) => {
-        console.log(chat._id, id, chat._id == id);
         return chat._id.toString() === id;
       });
 
@@ -139,9 +142,9 @@ class _ChatController {
     try {
       const { user } = req;
       const { chatId, msgId, value } = req.body;
+      console.log(new Date());
       const currentUser = await User.findById(user._id);
       const chatIndex = currentUser.chats.findIndex((chat) => {
-        console.log(chat._id, chatId, chat._id == chatId);
         return chat._id.toString() === chatId;
       });
 
@@ -168,6 +171,7 @@ class _ChatController {
     try {
       const { user } = req;
       const { chatId, msgId } = req.query;
+      console.log(new Date());
       console.log(`delete msg: ${chatId} - ${msgId}`);
       const currentUser = await User.findById(user._id);
       if (!currentUser) {

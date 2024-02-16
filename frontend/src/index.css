@@ -57,10 +57,3 @@ button {
 .echarts-for-react {
   background-color: #fff;
 }
-.right-chat {
-  align-self: flex-end; /* Move chat to the right */
-}
-
-.left-chat {
-  align-self: flex-start; /* Move chat to the left */
-}

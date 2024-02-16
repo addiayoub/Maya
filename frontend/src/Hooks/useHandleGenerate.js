@@ -23,6 +23,7 @@ const useHandleGenerate = () => {
           .then(({ chatId }) => {
             console.log("call createChat");
             dispatch(setCurrentChat(chatId));
+            localStorage.setItem("currentChatId", chatId);
             dispatch(setChatsHistory([{ _id: chatId, title, messages: [] }]));
 
             console.log("success", chatId);
