@@ -12,6 +12,10 @@ import ScrollToTop from "../components/Ui/ScrollToTop";
 import Messages from "../components/Test/Messages";
 import ChatBox from "../components/Chat/ChatBox";
 import Trading from "../components/Charts/Trading";
+import PredictiveText from "../components/Test/PredictiveText";
+import Profile from "../components/Users/Profile";
+import CandelsVolume from "../components/Test/CandelsVolume";
+import TradingChartV2 from "../components/Charts/TradingChartV2";
 
 export default function RouterProvider() {
   return (
@@ -23,6 +27,9 @@ export default function RouterProvider() {
             <Route path="/" element={<ChatBox />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/trading" element={<Trading />} />
+            <Route path="/candels" element={<TradingChartV2 />} />
+            <Route path="/pre" element={<PredictiveText />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
           <Route element={<LoginRoute />}>
             <Route element={<Login />} path="/login" />

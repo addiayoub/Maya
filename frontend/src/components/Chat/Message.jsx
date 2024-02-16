@@ -27,7 +27,6 @@ const Message = ({
 }) => {
   const [showChart, setShowChart] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  content = !isUser ? formatBoldText(content) : content;
   const dispatch = useDispatch();
   console.log("isLiked", likedByUser);
   const { user } = useSelector((state) => state.auth);
@@ -128,7 +127,16 @@ const Message = ({
                     className="my-2"
                   /> */}
                     <div className="my-2">
-                      {isLast ? <Typewriter text={content} /> : content}
+                      {isLast ? (
+                        <Typewriter text={content} />
+                      ) : (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: !isUser ? formatBoldText(content) : content,
+                          }}
+                          className="my-2"
+                        />
+                      )}
                     </div>
 
                     {/* {base64Image && chartData && chartType === "trading" && (

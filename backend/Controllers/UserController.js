@@ -131,6 +131,65 @@ class _UserController {
       msgId: lastMessageId,
     });
   }
+
+  async upload(req, res) {
+    console.log("Upload", req.file);
+    return res.json({ res: true });
+  }
+
+  async updateProfile(req, res) {
+    const { username, password, passwordConfirmation } = req.body;
+    const { user } = req;
+    // console.log("req.file", req.file);
+    // console.log("file", req);
+    // const currentUser = await User.findById(user._id);
+    // let newInfos = { username };
+    // const exists = await User.findOne({ username, _id: { $ne: user._id } });
+
+    // if (exists) {
+    //   return res.status(400).json({
+    //     message: {
+    //       username:
+    //         "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.",
+    //     },
+    //   });
+    // }
+
+    // currentUser.username = username.toLowerCase();
+
+    // if (password || passwordConfirmation) {
+    //   if (password !== passwordConfirmation) {
+    //     return res.status(400).json({
+    //       message: { password: "Les mots de passes ne s'accords pas !" },
+    //     });
+    //   }
+
+    //   const salt = await bcrypt.genSalt(10);
+    //   const hashedPassword = await bcrypt.hash(password, salt);
+    //   user.password = hashedPassword;
+    //   newInfos.password = hashedPassword;
+    // }
+    // // Validate user schema
+    // const validationError = user.validateSync();
+    // if (validationError) {
+    //   const { errors } = validationError;
+    //   const formattedErrors = {};
+    //   Object.keys(errors).forEach((key) => {
+    //     formattedErrors[key] = errors[key].message;
+    //   });
+    //   return res.status(400).json({ message: formattedErrors });
+    // }
+    // const newUser = await User.findByIdAndUpdate(
+    //   user._id,
+    //   { $set: newInfos },
+    //   { new: true }
+    // );
+    // res.status(201).send({
+    //   message: "Vos informations ont été mises à jour avec succès",
+    //   newUser,
+    // });
+    return res.status(200).json({ message: "done", body: req.body });
+  }
 }
 const userController = new _UserController();
 module.exports = userController;

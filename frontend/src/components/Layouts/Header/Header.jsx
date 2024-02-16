@@ -63,12 +63,12 @@ function Header() {
             </IconButton>
           </div>
           <ul className={`profile-links ${isOpenDropdown ? "show" : ""}`}>
-            {/* <li> */}
-            {/* <Link to="/profile"> */}
-            {/* <User size="25" /> */}
-            {/* Profile */}
-            {/* </Link> */}
-            {/* </li> */}
+            {/* <li>
+              <Link to="/profile">
+                <User size="25" />
+                Profile
+              </Link>
+            </li> */}
             <li>
               <Link to="/logout" onClick={handelLogout}>
                 <LogOut size={22} />

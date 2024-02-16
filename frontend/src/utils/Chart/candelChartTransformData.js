@@ -11,11 +11,19 @@ export const candelChartTransformData = (
   console.log("array data", arrayData);
   const categoryData = [];
   const values = [];
-  arrayData.map((item) => {
+  const volumes = [];
+  arrayData.map((item, index) => {
     categoryData.push(moment(item[seance]).format("DD/MM/YYYY"));
     values.push([item[open], item[close], item[lower], item[higher]]);
+    volumes.push([index, item.Volume, item[open] > item[close] ? 1 : -1]);
+    console.log("voilume", [
+      index,
+      item.Volume,
+      item[open] > item[close] ? 1 : -1,
+    ]);
+    // volumes.push(item.Volume);
   });
-  return { categoryData, values };
+  return { categoryData, values, volumes };
 };
 
 export const calculateMA = (dayCount, data0) => {

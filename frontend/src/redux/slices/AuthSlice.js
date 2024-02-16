@@ -22,6 +22,7 @@ const authSlice = createSlice({
     },
     updateUsername: (state, { payload }) => {
       state.user = { ...state.user, username: payload };
+      localStorage.setItem("user", JSON.stringify(state.user));
     },
   },
   extraReducers: (builder) => {
