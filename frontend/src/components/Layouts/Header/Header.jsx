@@ -15,9 +15,13 @@ import {
   User,
 } from "react-feather";
 import { toggleSidebar } from "../../../redux/slices/LayoutSlice";
+import { hostName } from "../../../api/config";
+import ModalComponent from "../../Ui/ModalComponent";
+import Profile from "../../Users/Profile";
 
 function Header() {
   const { isOpen } = useSelector((state) => state.layout);
+  const [openProfile, setOpenProfile] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const { user } = useSelector((state) => state.auth);
   // const theme = useSelector((state) => state.theme);
@@ -28,57 +32,75 @@ function Header() {
     notyf.success("Vous avez été déconnecté avec succès.");
   };
   return (
-    <header className="header">
-      <div
-        // className={`menu-icon ${isOpen ? "opened" : "closed"}  toggle-sidebar`}
-        className={`menu-icon toggle-sidebar`}
-      >
-        <IconButton onClick={() => dispatch(toggleSidebar(!isOpen))}>
-          {isOpen ? <ChevronsLeft /> : <ChevronsRight />}
-        </IconButton>
-      </div>
-      <div className="header-right">
-        {/* <ToggleTheme /> */}
+    <>
+      <header className="header">
         <div
-          className="profile"
-          onClick={() => setIsOpenDropdown(!isOpenDropdown)}
+          // className={`menu-icon ${isOpen ? "opened" : "closed"}  toggle-sidebar`}
+          className={`menu-icon toggle-sidebar`}
         >
-          <div className="profile-icons">
-            <User size={22} />
-            <span className="user" id="user">
-              {user.username}
-            </span>
-            <IconButton sx={{ padding: 0 }}>
-              {isOpenDropdown ? (
-                <ChevronUp
-                  size={22}
-                  // color={`${theme.darkTheme ? "#fff" : "#373736"}`}
-                />
-              ) : (
-                <ChevronDown
-                  size={22}
-                  // color={`${theme.darkTheme ? "#fff" : "#373736"}`}
-                />
-              )}
-            </IconButton>
-          </div>
-          <ul className={`profile-links ${isOpenDropdown ? "show" : ""}`}>
-            {/* <li>
-              <Link to="/profile">
-                <User size="25" />
-                Profile
-              </Link>
-            </li> */}
-            <li>
-              <Link to="/logout" onClick={handelLogout}>
-                <LogOut size={22} />
-                Déconnecion
-              </Link>
-            </li>
-          </ul>
+          <IconButton onClick={() => dispatch(toggleSidebar(!isOpen))}>
+            {isOpen ? <ChevronsLeft /> : <ChevronsRight />}
+          </IconButton>
         </div>
-      </div>
-    </header>
+        <div className="header-right">
+          {/* <ToggleTheme /> */}
+          <div
+            className="profile"
+            onClick={() => setIsOpenDropdown(!isOpenDropdown)}
+          >
+            <div className="profile-icons">
+              {/* <User size={22} /> */}
+              <div className="profile-icon w-[30px] h-[30px] rounded-[50%] overflow-hidden">
+                <img
+                  src={`${hostName}/images/${user.image}`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <span className="user" id="user">
+                {user.username}
+              </span>
+              <IconButton sx={{ padding: 0 }}>
+                {isOpenDropdown ? (
+                  <ChevronUp
+                    size={22}
+                    // color={`${theme.darkTheme ? "#fff" : "#373736"}`}
+                  />
+                ) : (
+                  <ChevronDown
+                    size={22}
+                    // color={`${theme.darkTheme ? "#fff" : "#373736"}`}
+                  />
+                )}
+              </IconButton>
+            </div>
+            <ul className={`profile-links ${isOpenDropdown ? "show" : ""}`}>
+              <li>
+                <Link to={null} onClick={() => setOpenProfile(true)}>
+                  <User size="25" />
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <Link to="/logout" onClick={handelLogout}>
+                  <LogOut size={22} />
+                  Déconnexion
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      {openProfile && (
+        <ModalComponent
+          open={openProfile}
+          handleClose={() => setOpenProfile(false)}
+          withHeader
+          headerText={`Profile`}
+        >
+          <Profile />
+        </ModalComponent>
+      )}
+    </>
   );
 }
 

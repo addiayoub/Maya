@@ -1,19 +1,44 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import Message from "./Message";
 import { useSelector } from "react-redux";
+import { IconButton } from "@mui/material";
+import { ArrowDown, ChevronDown } from "react-feather";
 const Messages = () => {
   const { chats, lastMsgId } = useSelector((state) => state.chat);
-  console.log("lastMsgId", lastMsgId);
   const lastMsg = useRef(null);
+  const msgsRef = useRef(null);
+  const [showBtn, setShowBtn] = useState(false);
+
+  useEffect(() => {
+    const msgsContainer = msgsRef.current;
+    const handleScroll = () => {
+      const { scrollHeight, clientHeight, scrollTop } = msgsContainer;
+      const maxScrollHeight = scrollHeight - clientHeight;
+      const showBtn = scrollTop <= maxScrollHeight - 50;
+      setShowBtn(showBtn);
+    };
+    msgsContainer?.addEventListener("scroll", handleScroll);
+    return () => {
+      msgsContainer?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  // const shouldHideSidebar = windowWidth < 992;
   useEffect(() => {
     // Scroll to the last message when component updates
-    if (lastMsg.current) {
-      lastMsg?.current?.scrollIntoView({ behavior: "smooth" });
-    }
+    console.log("INIT");
+    // if (lastMsg.current) {
+    //   console.log("is true");
+    //   lastMsg?.current?.scrollIntoView({ behavior: "smooth" });
+    // }
+    scrollToBtm();
   }, [chats]);
+  const scrollToBtm = () => {
+    console.log("lastMsg?.current", lastMsg?.current);
+    lastMsg?.current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     // <div className="flex-1 flex flex-col self-start w-full my-2 overflow-auto">
-    <div className="w-full overflow-y-auto">
+    <div className=" w-full overflow-y-auto" ref={msgsRef}>
       <div className="px-4 py-2 justify-center text-base md:gap-6 m-auto">
         <div className="flex-1 flex flex-col self-start w-full my-2">
           {chats.length > 0 && (
@@ -52,6 +77,14 @@ const Messages = () => {
           )}
         </div>
       </div>
+      {showBtn && (
+        <button
+          className="cursor-pointer absolute z-[9999] rounded-full bg-clip-padding right-1/2 bottom-[90px] shadow-xl border border-muted border-solid bg-white p-1"
+          onClick={scrollToBtm}
+        >
+          <ArrowDown size={24} color="#424242" />
+        </button>
+      )}
     </div>
   );
 };

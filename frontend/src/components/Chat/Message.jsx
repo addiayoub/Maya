@@ -1,9 +1,8 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useRef } from "react";
 import { Chart } from "../Charts/Chart";
 import Typewriter from "../Typewriter";
 import { useDispatch, useSelector } from "react-redux";
 import MiniLogo from "../../assets/images/mini-logo.png";
-import Avatar from "../../assets/images/avatar.png";
 import { Clipboard, Trash } from "react-feather";
 import { deleteChat } from "../../redux/slices/ChatSlice";
 import { deleteMsg } from "../../redux/actions/ChatActions";
@@ -13,6 +12,7 @@ import ModalComponent from "../Ui/ModalComponent";
 import DeleteModal from "../Ui/DeleteModal";
 import { formatBoldText } from "../../utils/formatBoldText";
 import RatingButtons from "./RatingButtons";
+import { hostName } from "../../api/config";
 
 const Message = ({
   isUser,
@@ -25,23 +25,19 @@ const Message = ({
   isLast,
   id,
 }) => {
-  const [showChart, setShowChart] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [showActions, setShowActions] = useState(false);
+  const messageBoxRef = useRef(null);
   const dispatch = useDispatch();
   console.log("isLiked", likedByUser);
   const { user } = useSelector((state) => state.auth);
-  useEffect(() => {
-    const typingDuration = content.length * 30;
-    const chartTimeout = setTimeout(() => {
-      setShowChart(true);
-    }, typingDuration);
-
-    return () => {
-      clearTimeout(chartTimeout);
-    };
-  }, [content]);
 
   console.log("content from message", isUser, content);
+  useEffect(() => {
+    console.log("message box", messageBoxRef);
+    const msgBox = messageBoxRef.current;
+    // msgBox.addEventListener("click", () => alert("Hi"));
+  }, [messageBoxRef]);
 
   const handleDelete = (id) => {
     dispatch(deleteChat(id));
@@ -89,7 +85,9 @@ const Message = ({
                       decoding="async"
                       data-nimg="1"
                       className="rounded-sm"
-                      src={isUser ? Avatar : MiniLogo}
+                      src={
+                        isUser ? `${hostName}/images/${user.image}` : MiniLogo
+                      }
                     />
                   </div>
                 </div>
@@ -111,14 +109,6 @@ const Message = ({
                   className="min-h-[20px] text-message flex flex-col items-start gap-3 whitespace-pre-wrap break-words [.text-message+&amp;]:mt-5 overflow-x-auto"
                 >
                   <div className="">
-                    {/* {base64Image && (
-                    <img
-                      src={`data:image/png;base64,${base64Image}`}
-                      alt="Base64 Image"
-                      width="100%"
-                      height: '600'
-                    />
-                  )} */}
                     {/* {isUser ? content : <Typewriter text={content} />} */}
                     {/* {isUser ? content : content} */}
                     {chartData && <Chart data={chartData} type={chartType} />}
@@ -126,9 +116,12 @@ const Message = ({
                     dangerouslySetInnerHTML={{ __html: content }}
                     className="my-2"
                   /> */}
-                    <div className="my-2">
+                    <div className="my-2" ref={messageBoxRef}>
                       {isLast ? (
-                        <Typewriter text={content} />
+                        <Typewriter
+                          text={content}
+                          setShowActions={setShowActions}
+                        />
                       ) : (
                         <div
                           dangerouslySetInnerHTML={{
@@ -138,22 +131,17 @@ const Message = ({
                         />
                       )}
                     </div>
-
-                    {/* {base64Image && chartData && chartType === "trading" && (
-                    <img
-                      src={`data:image/png;base64,${base64Image}`}
-                      alt="chart-image"
-                      width="100%"
-                      height="600"
-                    />
-                  )} */}
-
-                    {/* <ThumbsUp fill="green" size={18} />
-                  <ThumbsDown fill="red" size={18} /> */}
-                    {/* <h3>{id}</h3>
-                  <h3>{likedBuUser}</h3> */}
-
-                    {(!isLast || showChart) && (
+                    {isUser && (
+                      <div className="flex gap-2 items-center">
+                        <Clipboard
+                          onClick={() => handleCopy(content)}
+                          size={22}
+                          className="hover:text-primary cursor-pointer"
+                        />
+                      </div>
+                    )}
+                    {/* (!isLast || showChart) && */}
+                    {(!isLast || showActions) && (
                       <div className="flex gap-2 items-center">
                         {!isUser && (
                           <Clipboard
@@ -181,12 +169,17 @@ const Message = ({
           </div>
         </div>
       </div>
-      <ModalComponent open={openModal} handleClose={() => setOpenModal(false)}>
-        <DeleteModal
-          handleDeleteConfirmation={handleDeleteConfirmation}
-          // handleDelete={handleDeleteChat}
-        />
-      </ModalComponent>
+      {openModal && (
+        <ModalComponent
+          open={openModal}
+          handleClose={() => setOpenModal(false)}
+        >
+          <DeleteModal
+            handleDeleteConfirmation={handleDeleteConfirmation}
+            // handleDelete={handleDeleteChat}
+          />
+        </ModalComponent>
+      )}
     </>
   );
 };

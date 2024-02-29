@@ -14,7 +14,7 @@ export const Chart = ({ data, type }) => {
     return <BarChart data={data} />;
   }
   if (type === "trading") {
-    return <TradingChartV2 data={data} />;
+    return <TradingContainer data={data} />;
   }
   return <LineChart data={data} />;
 };

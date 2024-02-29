@@ -11,7 +11,7 @@ const initChats = [
     isUser: false,
     data: {
       content:
-        "**Bonjour** à nouveau ! Si vous avez des questions concernant les marchés financiers, je suis là pour vous aider. N'hésitez pas à les poser.",
+        "**Bonjour** à nouveau ! Si vous avez des questions concernant les marchés financiers, je suis là pour vous aider. **N'hésitez** pas à les poser.",
       // "Veuillez préciser davantage votre demande ou votre question afin que je puisse vous fournir une réponse plus appropriée et vous aider de manière plus efficace.",
       execution_time: 62,
       base64Image: null,
@@ -22,6 +22,7 @@ const initChats = [
 const initialState = {
   userInput: "",
   chats: JSON.parse(localStorage.getItem("currentChats")) ?? [],
+  // chats: initChats,
   currentChat: localStorage.getItem("currentChatId") ?? null,
   chatsHistory: JSON.parse(localStorage.getItem("chats")) ?? [],
   data: [],

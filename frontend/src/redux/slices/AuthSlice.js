@@ -20,8 +20,10 @@ const authSlice = createSlice({
       localStorage.removeItem("apiToken");
       Cookies.remove("jwt");
     },
-    updateUsername: (state, { payload }) => {
-      state.user = { ...state.user, username: payload };
+    updateCurrentUser: (state, { payload }) => {
+      const { username, image } = payload;
+      console.log("old", state.user, "Current user is", payload);
+      state.user = { ...state.user, username, image };
       localStorage.setItem("user", JSON.stringify(state.user));
     },
   },
@@ -46,5 +48,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, updateUsername } = authSlice.actions;
+export const { logout, updateCurrentUser } = authSlice.actions;
 export default authSlice.reducer;

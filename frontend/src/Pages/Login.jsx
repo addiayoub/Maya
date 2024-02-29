@@ -16,6 +16,7 @@ import { login } from "../redux/actions/AuthActions";
 import { lightTheme } from "../utils/theme";
 // import { ThemeProvider } from "@mui/material/styles";
 import Logo from "../assets/images/Logo.png";
+import EndAdorment from "../components/Ui/EndAdorment";
 
 function Copyright(props) {
   return (
@@ -38,6 +39,7 @@ function Copyright(props) {
 function Login() {
   const [loginInfos, setLoginInfos] = useState({ username: "", password: "" });
   const { loading, error } = useSelector((state) => state.auth);
+  const [isVisible, setIsVisible] = useState(false);
   const handelChange = (e) => {
     const { name, value } = e.target;
     setLoginInfos({
@@ -114,11 +116,19 @@ function Login() {
                 fullWidth
                 name="password"
                 label="Mot de passe"
-                type="password"
+                type={isVisible ? "text" : "password"}
                 id="password"
                 value={loginInfos.password}
                 onChange={handelChange}
                 autoComplete="current-password"
+                InputProps={{
+                  endAdornment: (
+                    <EndAdorment
+                      visible={isVisible}
+                      setVisible={setIsVisible}
+                    />
+                  ),
+                }}
               />
               <Button
                 type="submit"

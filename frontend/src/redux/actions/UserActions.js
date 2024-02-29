@@ -1,6 +1,87 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosClient from "../../api/axiosClient";
 
+export const getUsers = createAsyncThunk(
+  "user/getUsers",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosClient.get("/api/users/");
+      console.log("Users", response.data);
+      return response.data.users;
+    } catch (error) {
+      console.log("Error fetch users", error);
+      return thunkAPI.rejectWithValue("Server Error");
+    }
+  }
+);
+
+export const createUser = createAsyncThunk(
+  "user/createUser",
+  async (user, thunkAPI) => {
+    try {
+      const response = await axiosClient.post("/api/users/", user);
+      console.log("create user", response.data);
+      return response.data;
+    } catch (error) {
+      console.log("error.message", error);
+      if (error.response && error.response.data.message) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      } else {
+        return thunkAPI.rejectWithValue({
+          failed: true,
+          message: error.message,
+        });
+      }
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axiosClient.delete("/api/users/", {
+        params: { id },
+      });
+      console.log("deleteUser", response.data);
+      return response.data;
+    } catch (error) {
+      console.log("error.message", error);
+      if (error.response && error.response.data.message) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      } else {
+        return thunkAPI.rejectWithValue({
+          failed: true,
+          message: error.message,
+        });
+      }
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async ({ id, user }, thunkAPI) => {
+    try {
+      const { data } = await axiosClient.put(`/api/users/`, user, {
+        params: { id },
+      });
+      console.log(`update action:`, data);
+      return data;
+    } catch (error) {
+      // return custom error message from backend if present
+      if (error.response && error.response.data.message) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      } else {
+        return thunkAPI.rejectWithValue({
+          failed: true,
+          message: error.message,
+        });
+      }
+    }
+  }
+);
+
 export const storeMessage = async ({ userInput, aiResponse, chatId }) => {
   try {
     console.log("Call storeMessage", chatId);
@@ -29,7 +110,10 @@ export const updateProfile = createAsyncThunk(
     try {
       console.log("User is", user);
       let formData = new FormData();
-      formData.append("file", user.file);
+      formData.append("image", user.pic);
+      formData.append("username", user.username);
+      formData.append("password", user.password);
+      formData.append("passwordConfirmation", user.passwordConfirmation);
       const { data } = await axiosClient.post(
         `/api/users/update_profile`,
         formData
@@ -46,23 +130,6 @@ export const updateProfile = createAsyncThunk(
           message: error.message,
         });
       }
-    }
-  }
-);
-
-export const upload = createAsyncThunk(
-  "user/upload",
-  async ({ file }, thunkAPI) => {
-    try {
-      const formData = new FormData();
-      // formData.append("file", file);
-      formData.append("name", "Yuns");
-      console.log("file", file, formData);
-      const response = await axiosClient.post(`/api/users/upload`, formData);
-      console.log("response", response);
-      return "data";
-    } catch (error) {
-      console.log("Upload error", error);
     }
   }
 );
