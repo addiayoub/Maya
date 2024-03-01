@@ -48,6 +48,7 @@ class _authController {
         token,
         expiresIn: tokenExpiresIn,
         expiresAt: exp,
+        image: user.image,
       });
     } catch (error) {
       res.status(400).json({ error: error.message });

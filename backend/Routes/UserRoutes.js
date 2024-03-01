@@ -28,14 +28,15 @@ const upload = multer({ storage: storage });
 
 router.use(AuthMiddleware);
 // Create User
+router.get("/", userController.index);
+router.delete("/", userController.delete);
 router.post("/", userController.store);
+router.put("/", userController.update);
 router.post("/store_message", userController.storeMessage);
 router.post(
   "/update_profile",
-  upload.single("file"),
+  upload.single("image"),
   userController.updateProfile
 );
-
-router.post("/upload", upload.single("file"), userController.upload);
 
 module.exports = router;

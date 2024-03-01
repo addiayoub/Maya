@@ -56,11 +56,16 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    image: {
+      type: String,
+      default: "default-profile.jpg",
+    },
     chats: [
       {
         title: {
           type: String,
         },
+        isDeleted: { type: Boolean, default: false },
         messages: [
           {
             isUser: {
@@ -70,6 +75,7 @@ const userSchema = new mongoose.Schema(
               type: Object,
               default: {},
             },
+            isDeleted: { type: Boolean, default: false },
             timestamp: {
               type: Date,
               default: Date.now,

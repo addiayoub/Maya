@@ -7,7 +7,9 @@ class _ChatController {
       const { user } = req;
       console.log(new Date());
       const currentUser = await User.findById(user._id);
-      const chats = currentUser.chats.reverse();
+      const chats = currentUser.chats
+        .filter((chat) => !chat.isDeleted)
+        .reverse();
       return res.json({ chats });
     } catch (error) {
       console.error("message:", error);
@@ -44,6 +46,10 @@ class _ChatController {
       console.log(new Date());
       const currentUser = await User.findByIdAndUpdate(user._id);
       const chat = currentUser.chats.find((chat) => chat._id.toString() === id);
+      // Filter out deleted messages
+      const nonDeletedMessages = chat.messages.filter((msg) => !msg.isDeleted);
+      // Update the chat with non-deleted messages
+      chat.messages = nonDeletedMessages;
       return res.json({ chat });
     } catch (error) {
       console.error("message:", error);
@@ -82,15 +88,22 @@ class _ChatController {
       }
 
       // Use $pull to remove the chat from the array
-      currentUser.chats.splice(chatIndex, 1);
+      currentUser.chats[chatIndex].isDeleted = true;
+      // currentUser.chats.splice(chatIndex, 1);
+      console.log(
+        "currentUser.chats.splice(chatIndex, 1)",
+        currentUser.chats[chatIndex]
+      );
 
       // Save the updated user document
       await currentUser.save();
-      const chats = currentUser.chats.map((chat) => ({
-        _id: chat._id,
-        title: chat.title,
-        messages: chat.messages,
-      }));
+      const chats = currentUser.chats
+        .filter((chat) => !chat.isDeleted)
+        .map((chat) => ({
+          _id: chat._id,
+          title: chat.title,
+          messages: chat.messages,
+        }));
       res.status(200).json({
         message: "Chat supprimé avec succès.",
         chats,
@@ -124,6 +137,7 @@ class _ChatController {
       // Save the updated user document
       await currentUser.save();
       const chats = currentUser.chats
+        .filter((chat) => !chat.isDeleted)
         .map((chat) => ({
           id: chat._id,
           title: chat.title,
@@ -193,19 +207,23 @@ class _ChatController {
       if (msgIndex === -1) {
         return res.status(404).json({ message: "Message non trouvé." });
       }
-      currentUser.chats[chatIndex].messages.splice(msgIndex, 1);
+      // Mark the message as deleted
+      currentUser.chats[chatIndex].messages[msgIndex].isDeleted = true;
 
       // Check if there is a preceding message
       if (msgIndex > 0) {
         // Delete the preceding message
-        currentUser.chats[chatIndex].messages.splice(msgIndex - 1, 1);
+        // Mark the message as deleted
+        currentUser.chats[chatIndex].messages[msgIndex - 1].isDeleted = true;
       }
 
       // Save the updated user document
       await currentUser.save();
       res.status(200).json({
         message: "Message supprimé avec succès.",
-        messages: currentUser.chats[chatIndex].messages,
+        messages: currentUser.chats[chatIndex].messages.filter(
+          (msg) => !msg.isDeleted
+        ),
       });
     } catch (error) {
       console.error("message:", error);
