@@ -6,7 +6,9 @@ class _UserController {
   async index(req, res) {
     try {
       const loggedInUserId = req.user._id;
-      const users = await User.find({ _id: { $ne: loggedInUserId } }).sort({
+      const users = await User.find({
+        _id: { $ne: loggedInUserId },
+      }).sort({
         createdAt: -1,
       });
       return res.status(200).json({ users });
@@ -25,6 +27,8 @@ class _UserController {
         });
       }
       // await User.deleteOne({ _id: id });
+      exists.isDeleted = true;
+      exists.save();
       return res
         .status(200)
         .json({ message: "L'utilisateur a été supprimé avec succès." });
@@ -122,7 +126,7 @@ class _UserController {
       const { username, password, passwordConfirmation, isAdmin } = req.body;
       // return res.json({ username, password, passwordConfirmation, isAdmin });
       const user = await User.findById(id);
-      const user2 = await User.findOne({ username });
+      const user2 = await User.findOne({ username, isDeleted: false });
       if (user2) {
         if (user2.id != user.id) {
           return res.status(400).json({
@@ -225,7 +229,11 @@ class _UserController {
       newInfos.image = req.file.filename;
     }
     // currentUser.save();
-    const exists = await User.findOne({ username, _id: { $ne: user._id } });
+    const exists = await User.findOne({
+      username,
+      isDeleted: false,
+      _id: { $ne: user._id },
+    });
 
     if (exists) {
       return res.status(400).json({
@@ -250,8 +258,9 @@ class _UserController {
       user.password = hashedPassword;
       newInfos.password = hashedPassword;
     }
+
     // Validate user schema
-    const validationError = user.validateSync();
+    const validationError = currentUser.validateSync();
     if (validationError) {
       const { errors } = validationError;
       const formattedErrors = {};

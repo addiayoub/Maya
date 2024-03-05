@@ -69,7 +69,7 @@ const Message = ({
           //   isUser ? "bg-emerald-100 left-chat" : "bg-sky-100 right-chat"
           // } rounded-[28px] m-auto`}
           className={`flex flex-1 text-base mx-auto p-4 gap-3 md:px-5 lg:px-1 xl:px-5  rounded-[28px] group ${
-            isUser ? "bg-emerald-100 self-start" : "bg-sky-100"
+            isUser ? "bg-user self-start" : "bg-bot"
           }`}
         >
           <div className="flex-shrink-0 flex flex-col relative items-end">

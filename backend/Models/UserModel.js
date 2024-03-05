@@ -39,10 +39,10 @@ const userSchema = new mongoose.Schema(
         "Le nom d'utilisateur doit comporter au moins 5 caractères.",
       ],
       required: [true, "le nom d'utilisateur est obligatoire !"],
-      unique: [
-        true,
-        "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.",
-      ],
+      // unique: [
+      //   true,
+      //   "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.",
+      // ],
       trim: true,
       match: [usernameRegex, "nom d'utilisateur invalide"],
     },
@@ -53,6 +53,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    isDeleted: {
       type: Boolean,
       default: false,
     },
@@ -85,9 +89,26 @@ const userSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true, autoIndex: false }
 );
+// Define a compound index on 'username' and 'isDeleted'
+// userSchema.index({ username: 1, isDeleted: 1 }, { unique: true });
+userSchema.index(
+  { username: 1 },
+  {
+    unique: [true, "Ce nom d'utilisateur est déjà pris. Veuillez en bla bla."],
 
+    partialFilterExpression: {
+      isDeleted: false,
+    },
+  }
+);
+userSchema.pre("find", function () {
+  this.where({ isDeleted: false });
+});
+userSchema.pre("findOne", function () {
+  this.where({ isDeleted: false });
+});
 const User = mongoose.model("user", userSchema);
 
 module.exports = User;

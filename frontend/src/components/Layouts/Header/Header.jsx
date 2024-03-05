@@ -18,6 +18,7 @@ import { toggleSidebar } from "../../../redux/slices/LayoutSlice";
 import { hostName } from "../../../api/config";
 import ModalComponent from "../../Ui/ModalComponent";
 import Profile from "../../Users/Profile";
+import { resetChatSlice } from "../../../redux/slices/ChatSlice";
 
 function Header() {
   const { isOpen } = useSelector((state) => state.layout);
@@ -29,6 +30,7 @@ function Header() {
   const handelLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    dispatch(resetChatSlice());
     notyf.success("Vous avez été déconnecté avec succès.");
   };
   return (

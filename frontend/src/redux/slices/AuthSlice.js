@@ -18,6 +18,7 @@ const authSlice = createSlice({
       state.user = null;
       localStorage.removeItem("user");
       localStorage.removeItem("apiToken");
+      localStorage.clear();
       Cookies.remove("jwt");
     },
     updateCurrentUser: (state, { payload }) => {

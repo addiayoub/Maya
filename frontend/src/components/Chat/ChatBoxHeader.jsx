@@ -36,20 +36,20 @@ const ChatBoxHeader = () => {
     setRandomItems(selectedItems);
   };
   return (
-    <div className="sticky left-0 top-0 z-10 bg-white p-2 shadow-bottom w-full">
+    <div className="sticky left-0 top-0 z-10 bg-white p-0 shadow-bottom w-full">
       <div className="mb-1.5 flex items-center justify-between h-14 p-2 font-semibold dark:bg-gray-800">
         <div className="absolute left-1/2 -translate-x-1/2"></div>
         <div className="flex w-full justify-between items-center">
           <div className="flex items-center gap-2 select-none">
             <div
-              className="group flex items-center gap-1 rounded-xl py-2 px-3 text-lg font-medium bg-gray-50 radix-state-open:bg-gray-50 dark:bg-black/10 dark:radix-state-open:bg-black/20"
+              className="group flex items-center gap-1 rounded-xl py-2 px-2 text-lg font-medium bg-sky-50 radix-state-open:bg-gray-50 dark:bg-black/10 dark:radix-state-open:bg-black/20"
               type="button"
               id="radix-:rqr:"
               aria-haspopup="menu"
               aria-expanded="false"
               data-state="closed"
             >
-              <img src={logo} className="w-[37px] h-[37px]" />
+              <img src={logo} className="w-[30px] h-[30px]" />
               <div>MAYA GPT</div>
             </div>
             <Tooltip title={isShow ? "Collapse" : "Expand"} arrow>

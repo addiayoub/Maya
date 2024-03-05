@@ -19,6 +19,8 @@ export default {
         success: "#21cc6d",
         warning: "#ffb744",
         muted: "#acb2b7",
+        user: "#d1fae5",
+        bot: "#e0f2fe",
       },
       boxShadow: {
         bottom: "0 4px 2px -2px gray",

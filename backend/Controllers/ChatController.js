@@ -153,6 +153,7 @@ class _ChatController {
     }
   }
   async likeDislike(req, res) {
+    // {1 : 'like', 0: null, -1: 'dislike'}
     try {
       const { user } = req;
       const { chatId, msgId, value } = req.body;

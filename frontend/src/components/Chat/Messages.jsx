@@ -39,7 +39,7 @@ const Messages = () => {
   return (
     // <div className="flex-1 flex flex-col self-start w-full my-2 overflow-auto">
     <div className=" w-full overflow-y-auto" ref={msgsRef}>
-      <div className="px-4 py-2 justify-center text-base md:gap-6 m-auto">
+      <div className="px-4 py-2 justify-center text-base m-auto">
         <div className="flex-1 flex flex-col self-start w-full my-2">
           {chats.length > 0 && (
             <div
@@ -79,7 +79,7 @@ const Messages = () => {
       </div>
       {showBtn && (
         <button
-          className="cursor-pointer absolute z-[9999] rounded-full bg-clip-padding right-1/2 bottom-[90px] shadow-xl border border-muted border-solid bg-white p-1"
+          className="cursor-pointer absolute right-1/2 z-[1] rounded-full bg-clip-padding bottom-[90px] shadow-xl border border-muted border-solid bg-white p-1"
           onClick={scrollToBtm}
         >
           <ArrowDown size={24} color="#424242" />

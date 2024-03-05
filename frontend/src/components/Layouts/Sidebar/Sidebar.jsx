@@ -15,6 +15,7 @@ import {
   setCurrentChat,
   editChatHistory,
   resetLastMsgId,
+  resetChatSlice,
 } from "../../../redux/slices/ChatSlice";
 import {
   createChat,
@@ -100,6 +101,7 @@ const Sidebar = () => {
     // dispatch(createChat({ title: "New chat" }));
     dispatch(resetLoading());
     dispatch(newChat());
+    dispatch(resetChatSlice());
   };
   useEffect(() => {
     setIsLoading(true);
@@ -243,12 +245,17 @@ const Sidebar = () => {
           </div>
         </div> */}
       </aside>
-      <ModalComponent open={openModal} handleClose={() => setOpenModal(false)}>
-        <DeleteModal
-          handleDeleteConfirmation={handleDeleteConfirmation}
-          // handleDelete={handleDeleteChat}
-        />
-      </ModalComponent>
+      {openModal && (
+        <ModalComponent
+          open={openModal}
+          handleClose={() => setOpenModal(false)}
+        >
+          <DeleteModal
+            handleDeleteConfirmation={handleDeleteConfirmation}
+            // handleDelete={handleDeleteChat}
+          />
+        </ModalComponent>
+      )}
     </>
   );
 };

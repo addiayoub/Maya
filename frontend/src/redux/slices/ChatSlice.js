@@ -39,6 +39,9 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
+    resetChatSlice: (state) => {
+      state = initialState;
+    },
     resetLastMsgId: (state) => {
       state.lastMsgId = null;
     },
@@ -171,6 +174,7 @@ export const {
   handleLikeDislike,
   deleteChat,
   resetLastMsgId,
+  resetChatSlice,
   editChatHistory,
 } = chatSlice.actions;
 export default chatSlice.reducer;

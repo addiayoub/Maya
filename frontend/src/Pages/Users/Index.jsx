@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../redux/actions/UserActions";
 import Table from "../../components/Table";
 import { getColumns } from "./columns";
-import { Button } from "@mui/material";
-import { Plus } from "react-feather";
+import { Box, Button, Typography } from "@mui/material";
+import { Mail, MessageCircle, Plus, User } from "react-feather";
 import Create from "./CRUD/Create";
-import DeleteModal from "../../components/Ui/DeleteModal";
-import ModalComponent from "../../components/Ui/ModalComponent";
 import Delete from "./CRUD/Delete";
 import Update from "./CRUD/Update";
+import UserDetails from "./CRUD/UserDetails";
+import MessagesTable from "./MessagesTable";
+
 const Index = () => {
   const {
     users: { data, loading, error },
@@ -19,8 +20,8 @@ const Index = () => {
     create: { state: false, payload: null },
     delete: { state: false, payload: null },
     update: { state: false, payload: null },
+    show: { state: false, payload: null },
   });
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
@@ -34,10 +35,8 @@ const Index = () => {
     });
   };
   const columns = getColumns(handleModals);
-
   return (
-    <>
-      <h3>Users Route</h3>
+    <Box>
       <Button
         variant="contained"
         size="small"
@@ -45,13 +44,14 @@ const Index = () => {
       >
         Ajouter un utilisateur <Plus color="white" />
       </Button>
-      <Table rows={data} columns={columns} />
+      <Table rows={data} columns={columns} pageSize={25} />
       {modals.create.state && (
         <Create
           open={modals.create.state}
           setModalOff={() => handleModals("create")}
         />
       )}
+      <MessagesTable />
       {modals.delete.state && (
         <Delete
           data={modals.delete}
@@ -64,15 +64,23 @@ const Index = () => {
           setModalOff={() => handleModals("update")}
         />
       )}
-      {data.map((item) => {
+      {modals.show.state && (
+        <UserDetails
+          data={modals.show}
+          setModalOff={() => handleModals("show")}
+        />
+      )}
+      {/* {data.map((item) => {
         return (
           <p key={item._id}>
-            {item.username} - {item.isAdmin ? "Admin" : "User"} - Chats:{" "}
-            {item.chats.length}
+            {item.username} - {item.isAdmin ? "Admin" : "User"} - Chats:
+            {item.chats.length}- Deleted Chats :
+            {item.chats.filter((chat) => chat.isDeleted).length}- Deleted
+            messages: {countDeletedMessages(item)}
           </p>
         );
-      })}
-    </>
+      })} */}
+    </Box>
   );
 };
 

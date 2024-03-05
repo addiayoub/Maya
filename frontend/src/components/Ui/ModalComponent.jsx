@@ -24,10 +24,15 @@ export default function ModalComponent({
   style = {},
   withHeader,
   headerText,
+  className,
 }) {
   return (
     <div>
-      <Modal open={open} onClose={handleClose} className="overflow-auto">
+      <Modal
+        open={open}
+        onClose={handleClose}
+        className={`overflow-auto ${className}`}
+      >
         <Box sx={{ ...basedStyle, ...style }}>
           {withHeader && (
             <Box className="mb-3">
