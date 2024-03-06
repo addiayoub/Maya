@@ -8,17 +8,14 @@ import {
   newChat,
   clearChatsHistory,
   resetLoading,
-  setChat,
   setChats,
   setChatsHistory,
-  setChatsHistory2,
   setCurrentChat,
   editChatHistory,
   resetLastMsgId,
   resetChatSlice,
 } from "../../../redux/slices/ChatSlice";
 import {
-  createChat,
   deleteChat,
   editChat,
   getChat,
@@ -98,10 +95,8 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const handleNewChat = () => {
     console.log("Chats is", chats);
-    // dispatch(createChat({ title: "New chat" }));
     dispatch(resetLoading());
     dispatch(newChat());
-    dispatch(resetChatSlice());
   };
   useEffect(() => {
     setIsLoading(true);
@@ -195,7 +190,9 @@ const Sidebar = () => {
               return (
                 <li
                   onClick={() => handleGetChat(id)}
-                  className="side-menu-item hover:bg-gray-100 text-sm flex items-center justify-between "
+                  className={`side-menu-item text-sm flex items-center justify-between hover:bg-gray-100 ${
+                    currentChat === id ? "bg-gray-100" : ""
+                  }`}
                   key={id}
                 >
                   {editingChatId === id ? (

@@ -25,23 +25,33 @@ export const transformUsersData = (data) => {
   const newData = [];
   // Transform your users' data into rows for the DataGrid
   data?.forEach((user) => {
-    console.log("dd?.forEach", user);
     user?.chats.forEach((chat) => {
-      chat.messages.forEach((message) => {
-        newData.push({
-          id: message._id,
-          username: user.username,
-          chat: { title: chat.title, isDeleted: chat.isDeleted },
-          message: {
-            content: message.data.content,
-            isLiked: message.data?.likedByUser,
-            isDeleted: message.isDeleted,
-            isUser: message.isUser,
-            createdAt: message.timestamp,
-          },
-          // Add more data fields as needed
-        });
-      });
+      chat.messages.forEach(
+        ({
+          _id,
+          isDeleted,
+          input: { content: inputConent },
+          output: { content, likedByUser, execution_time },
+          timestamp,
+        }) => {
+          newData.push({
+            user: {
+              username: user.username,
+              profile: user.image,
+            },
+            username: user.username,
+            chat: { title: chat.title, isDeleted: chat.isDeleted },
+            message: {
+              id: _id,
+              input: { content: inputConent },
+              output: { content, execution_time },
+              isLiked: likedByUser,
+              isDeleted: isDeleted,
+              createdAt: timestamp,
+            },
+          });
+        }
+      );
     });
   });
   console.log("newData", newData);

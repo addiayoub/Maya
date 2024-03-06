@@ -72,10 +72,11 @@ const userSchema = new mongoose.Schema(
         isDeleted: { type: Boolean, default: false },
         messages: [
           {
-            isUser: {
-              type: Boolean,
+            input: {
+              type: Object,
+              default: {},
             },
-            data: {
+            output: {
               type: Object,
               default: {},
             },

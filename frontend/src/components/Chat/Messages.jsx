@@ -22,14 +22,9 @@ const Messages = () => {
       msgsContainer?.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  // const shouldHideSidebar = windowWidth < 992;
   useEffect(() => {
     // Scroll to the last message when component updates
     console.log("INIT");
-    // if (lastMsg.current) {
-    //   console.log("is true");
-    //   lastMsg?.current?.scrollIntoView({ behavior: "smooth" });
-    // }
     scrollToBtm();
   }, [chats]);
   const scrollToBtm = () => {
@@ -48,28 +43,25 @@ const Messages = () => {
             >
               {chats.map((item, index) => {
                 console.log("messages Chats map", chats);
-
-                const { data, isUser } = item;
-                return isUser ? (
-                  <Message
-                    isUser
-                    content={data.content}
-                    key={item._id ?? index}
-                  />
-                ) : (
-                  <Message
-                    key={item._id}
-                    id={item._id}
-                    content={data.content}
-                    execution_time={data.execution_time}
-                    base64Image={data.base64Image}
-                    chartData={data.chartData}
-                    chartType={data.chartType}
-                    likedByUser={data.likedByUser}
-                    isLast={
-                      chats.length - 1 === index && item._id === lastMsgId
-                    }
-                  />
+                const { input, output } = item;
+                return (
+                  <React.Fragment key={item._id ?? index}>
+                    {input && <Message isUser content={input.content} />}
+                    {output && (
+                      <Message
+                        id={item._id}
+                        content={output.content}
+                        execution_time={output.execution_time}
+                        base64Image={output.base64Image}
+                        chartData={output.chartData}
+                        chartType={output.chartType}
+                        likedByUser={output.likedByUser}
+                        isLast={
+                          chats.length - 1 === index && item._id === lastMsgId
+                        }
+                      />
+                    )}
+                  </React.Fragment>
                 );
               })}
               <div ref={lastMsg}></div>

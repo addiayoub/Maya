@@ -1,0 +1,308 @@
+[
+  {
+    "_id": "65ddac79a95dfc2865653ceb",
+    "username": "test_user",
+    "isAdmin": false,
+    "image": "default-profile.jpg",
+    "chats": [
+      {
+        "title": "Chat 63",
+        "isDeleted": false,
+        "_id": "65e6eb4e12fd7df1e78aff18",
+        "messages": [
+          {
+            "input": {
+              "content": "Bonjour"
+            },
+            "output": {
+              "content": "Bonjour ! Je suis MAYA, votre assistante spécialisée dans les marchés financiers, développée par ID&A TECH. Comment puis-je vous aider aujourd'hui dans ce domaine ?",
+              "execution_time": 8,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6eb5612fd7df1e78aff1f",
+            "timestamp": "2024-03-05T09:52:22.856Z"
+          },
+          {
+            "input": {
+              "content": "Bonjour"
+            },
+            "output": {
+              "content": "Bonjour ! Je suis MAYA, développée par ID&A TECH, spécialisée dans les marchés financiers. Comment puis-je vous aider aujourd'hui dans ce domaine ?",
+              "execution_time": 11,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f11412fd7df1e78aff63",
+            "timestamp": "2024-03-05T10:16:52.310Z"
+          },
+          {
+            "input": {
+              "content": "hello"
+            },
+            "output": {
+              "content": "Bonjour ! En tant que MAYA, développée par ID&A TECH, je suis là pour répondre à vos questions concernant les marchés financiers. Comment puis-je vous aider aujourd'hui ?",
+              "execution_time": 14,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": true,
+            "_id": "65e6f23a12fd7df1e78aff75",
+            "timestamp": "2024-03-05T10:21:46.968Z"
+          },
+          {
+            "input": {
+              "content": "Bonjour"
+            },
+            "output": {
+              "content": "Bonjour ! Je suis MAYA, développée par ID&A TECH, spécialisée dans les marchés financiers. Comment puis-je vous assister aujourd'hui dans ce domaine ?",
+              "execution_time": 9,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f2a212fd7df1e78aff8b",
+            "timestamp": "2024-03-05T10:23:30.290Z"
+          },
+          {
+            "input": {
+              "content": "hello"
+            },
+            "output": {
+              "content": "Bonjour ! Je suis MAYA, développée par ID&A TECH, spécialisée dans les marchés financiers. Comment puis-je vous aider aujourd'hui dans ce domaine ?",
+              "execution_time": 6,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f2e412fd7df1e78affb1",
+            "timestamp": "2024-03-05T10:24:36.948Z"
+          },
+          {
+            "input": {
+              "content": "hi"
+            },
+            "output": {
+              "content": "Bonjour ! Je suis MAYA, développée par ID&A TECH, spécialisée dans les marchés financiers. Comment puis-je vous aider aujourd'hui dans ce domaine ?",
+              "execution_time": 5,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f34812fd7df1e78affdd",
+            "timestamp": "2024-03-05T10:26:16.237Z"
+          },
+          {
+            "input": {
+              "content": "Bonjour"
+            },
+            "output": {
+              "content": "Bonjour ! En tant que MAYA, développée par ID&A TECH et spécialisée dans les marchés financiers, je suis là pour répondre à vos questions concernant la finance, l'économie, les mathématiques et les sciences de données. Comment puis-je vous aider aujourd'hui dans ces domaines ?",
+              "execution_time": 13,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f3ad12fd7df1e78affff",
+            "timestamp": "2024-03-05T10:27:57.759Z"
+          },
+          {
+            "input": {
+              "content": "hallo"
+            },
+            "output": {
+              "content": "Bonjour ! En tant que MAYA, développée par ID&A TECH et spécialisée dans les marchés financiers, je suis là pour répondre à vos questions concernant la finance, l'économie, les mathématiques et les sciences de données. Comment puis-je vous aider aujourd'hui ?",
+              "execution_time": 9,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f3c712fd7df1e78b0025",
+            "timestamp": "2024-03-05T10:28:23.530Z"
+          },
+          {
+            "input": {
+              "content": "salam"
+            },
+            "output": {
+              "content": "Bonjour ! Comment puis-je vous aider aujourd'hui dans le domaine des marchés financiers ?",
+              "execution_time": 5,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f49812fd7df1e78b004f",
+            "timestamp": "2024-03-05T10:31:52.969Z"
+          },
+          {
+            "input": {
+              "content": "salamo"
+            },
+            "output": {
+              "content": "Bonjour ! En tant que MAYA, développée par ID&A TECH et spécialisée dans les marchés financiers, je suis là pour répondre à vos questions concernant la finance, l'économie, les mathématiques et les sciences de données. Comment puis-je vous aider aujourd'hui dans ces domaines ?",
+              "execution_time": 17,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f56412fd7df1e78b007d",
+            "timestamp": "2024-03-05T10:35:16.390Z"
+          },
+          {
+            "input": {
+              "content": "ahlan"
+            },
+            "output": {
+              "content": "Ahlan! Comment puis-je vous aider aujourd'hui en ce qui concerne les marchés financiers?",
+              "execution_time": 5,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f67d12fd7df1e78b00c7",
+            "timestamp": "2024-03-05T10:39:57.122Z"
+          },
+          {
+            "input": {
+              "content": "Quelles sont les fonctionnalités que tu propose?"
+            },
+            "output": {
+              "content": "Maya est une IA spécialisée dans l'analyse financière destinée au marché financier. Les fonctionnalités que je propose couvrent divers aspects des marchés financiers, de l'économie et de l'analyse des entreprises pour aider les investisseurs à une prise de décisions éclairées. Voici les fonctionnalités disponibles:\n\n1. Synthèse des marchés: Je fournis un résumé des tendances et des événements importants qui affectent les marchés financiers.\n\n2. Indicateurs Macroéconomiques: J'offre des analyses sur les indicateurs économiques qui peuvent influencer les marchés financiers, comme le PIB, le taux de chômage, l'inflation, etc.\n\n3. Évolution des Cours et Indices: Je suis capable de suivre et d'analyser l'évolution des prix des actions, des obligations, des indices boursiers et d'autres instruments financiers.\n\n4. Ratios de Performance et de Risque des OPCVM: Je calcule et interprète les différents ratios qui permettent d'évaluer la performance et le risque des organismes de placement collectif en valeurs mobilières.\n\n5. Analyse Financière: Je réalise des analyses financières détaillées des entreprises, y compris l'analyse des bilans, des comptes de résultat, des flux de trésorerie, etc.\n\n6. Production et envoi des Rapports: Je génère des rapports financiers et les envoie aux utilisateurs pour les tenir informés des dernières analyses et informations financières.\n\nCes fonctionnalités sont conçues pour fournir aux utilisateurs des informations précieuses et des outils d'analyse pour les aider dans leurs décisions d'investissement et de gestion de portefeuille financier.",
+              "execution_time": 16,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e6f70d12fd7df1e78b0131",
+            "timestamp": "2024-03-05T10:42:21.310Z"
+          },
+          {
+            "input": {
+              "content": "hala"
+            },
+            "output": {
+              "content": "Bonjour ! Je suis MAYA, développée par ID&A TECH, spécialisée dans les marchés financiers. Comment puis-je vous aider aujourd'hui dans ce domaine ? Si vous avez des questions sur la finance, l'économie, les mathématiques ou les sciences de données, je suis là pour vous assister.",
+              "execution_time": 14,
+              "base64Image": null,
+              "likedByUser": 1
+            },
+            "isDeleted": false,
+            "_id": "65e6f77012fd7df1e78b016b",
+            "timestamp": "2024-03-05T10:44:00.849Z"
+          },
+          {
+            "input": {
+              "content": "do you speak english"
+            },
+            "output": {
+              "content": "Yes, I can communicate in English. However, I must inform you that ID&A TECH has developed me, MAYA, to specialize in financial markets. I am here to address inquiries specifically related to finance, economics, mathematics, data science, and their applications within the financial sector. If you have any questions in these areas, feel free to ask, and I will be delighted to assist you.",
+              "execution_time": 11,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": true,
+            "_id": "65e6f80912fd7df1e78b01a9",
+            "timestamp": "2024-03-05T10:46:33.858Z"
+          },
+          {
+            "input": {
+              "content": "where in which day ?"
+            },
+            "output": {
+              "content": "Je suis désolée, mais votre question ne semble pas être en relation avec le marché financier ou les domaines connexes pour lesquels je suis spécialisée. Si vous avez des questions concernant la finance, l'économie, les mathématiques ou les sciences de données, je serais ravie de vous aider. Pour toute autre demande, je vous recommande de contacter un expert approprié.",
+              "execution_time": 14,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": true,
+            "_id": "65e6f93012fd7df1e78b01eb",
+            "timestamp": "2024-03-05T10:51:28.081Z"
+          },
+          {
+            "input": {
+              "content": "hello"
+            },
+            "output": {
+              "content": "Bonjour ! En tant que MAYA, développée par ID&A TECH et spécialisée dans les marchés financiers, je suis là pour répondre à vos questions concernant la finance, l'économie, les mathématiques et les sciences de données. Comment puis-je vous aider aujourd'hui ?",
+              "execution_time": 12,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": true,
+            "_id": "65e6fa6212fd7df1e78b02b9",
+            "timestamp": "2024-03-05T10:56:34.557Z"
+          },
+          {
+            "input": {
+              "content": "hi"
+            },
+            "output": {
+              "content": "Bonjour ! Je suis MAYA, développée par ID&A TECH, spécialisée dans les marchés financiers. Comment puis-je vous aider aujourd'hui dans ce domaine ?",
+              "execution_time": 9,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": true,
+            "_id": "65e6fab212fd7df1e78b0303",
+            "timestamp": "2024-03-05T10:57:54.374Z"
+          },
+          {
+            "input": {
+              "content": "hi how are you"
+            },
+            "output": {
+              "content": "Bonjour ! En tant que MAYA, je suis une intelligence artificielle développée par ID&A TECH, et je suis toujours prête à assister avec des informations et des analyses sur les marchés financiers. Comment puis-je vous aider aujourd'hui dans ce domaine ?",
+              "execution_time": 8,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": true,
+            "_id": "65e70061c51d71979e46de5c",
+            "timestamp": "2024-03-05T11:22:09.623Z"
+          }
+        ]
+      },
+      {
+        "title": "Chat 47",
+        "isDeleted": true,
+        "_id": "65e7029c9b83337341e19af8",
+        "messages": [
+          {
+            "input": {
+              "content": "hello, can you assist me in English ?"
+            },
+            "output": {
+              "content": "Of course, I'd be delighted to assist you in English. As MAYA, developed by ID&A TECH and specialized in financial markets, I'm here to provide you with information and academic recommendations related to finance, economics, mathematics, and data science. If you have any questions within these domains, please feel free to ask, and I'll do my best to provide you with the information you need. If you require the most up-to-date data or specialized assistance, I recommend reaching out to the ID&A TECH team to integrate the source of data into the PRISME solution. How may I assist you today?",
+              "execution_time": 18,
+              "base64Image": null,
+              "likedByUser": 1
+            },
+            "isDeleted": false,
+            "_id": "65e702af9b83337341e19b38",
+            "timestamp": "2024-03-05T11:31:59.164Z"
+          },
+          {
+            "input": {
+              "content": "What is ID&A TECH?"
+            },
+            "output": {
+              "content": "MAYA ne peut pas répondre à cette question, car elle n'est pas en relation avec le marché financier.",
+              "execution_time": 10,
+              "base64Image": null,
+              "likedByUser": 0
+            },
+            "isDeleted": false,
+            "_id": "65e702d49b83337341e19b93",
+            "timestamp": "2024-03-05T11:32:36.739Z"
+          }
+        ]
+      }
+    ],
+    "createdAt": "2024-02-27T09:33:45.307Z",
+    "updatedAt": "2024-03-05T11:34:00.938Z",
+    "__v": 20,
+    "isDeleted": false
+  }
+]

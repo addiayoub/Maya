@@ -4,8 +4,8 @@ import Typewriter from "../Typewriter";
 import { useDispatch, useSelector } from "react-redux";
 import MiniLogo from "../../assets/images/mini-logo.png";
 import { Clipboard, Trash } from "react-feather";
-import { deleteChat } from "../../redux/slices/ChatSlice";
-import { deleteMsg } from "../../redux/actions/ChatActions";
+import { deleteChat as deleteMsg } from "../../redux/slices/ChatSlice";
+import { deleteMsg as deleteMsgAction } from "../../redux/actions/ChatActions";
 import { handleCopy } from "../../utils/handleCopy";
 import { notyf } from "../../utils/notyf";
 import ModalComponent from "../Ui/ModalComponent";
@@ -29,7 +29,7 @@ const Message = ({
   const [showActions, setShowActions] = useState(false);
   const messageBoxRef = useRef(null);
   const dispatch = useDispatch();
-  console.log("isLiked", likedByUser);
+  console.log("isLiked", likedByUser, "isLast", isLast);
   const { user } = useSelector((state) => state.auth);
 
   console.log("content from message", isUser, content);
@@ -40,8 +40,8 @@ const Message = ({
   }, [messageBoxRef]);
 
   const handleDelete = (id) => {
-    dispatch(deleteChat(id));
-    dispatch(deleteMsg({ msgId: id }))
+    dispatch(deleteMsg(id));
+    dispatch(deleteMsgAction({ msgId: id }))
       .unwrap()
       .then((resp) => console.log("resp", resp))
       .catch((err) => {
@@ -109,13 +109,7 @@ const Message = ({
                   className="min-h-[20px] text-message flex flex-col items-start gap-3 whitespace-pre-wrap break-words [.text-message+&amp;]:mt-5 overflow-x-auto"
                 >
                   <div className="">
-                    {/* {isUser ? content : <Typewriter text={content} />} */}
-                    {/* {isUser ? content : content} */}
                     {chartData && <Chart data={chartData} type={chartType} />}
-                    {/* <div
-                    dangerouslySetInnerHTML={{ __html: content }}
-                    className="my-2"
-                  /> */}
                     <div className="my-2" ref={messageBoxRef}>
                       {isLast ? (
                         <Typewriter

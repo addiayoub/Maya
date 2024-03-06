@@ -2,8 +2,16 @@ import { IconButton } from "@mui/material";
 import moment from "moment";
 import { Edit, Eye, Trash } from "react-feather";
 import { Rating } from "../../components/Helpers";
+import { hostName } from "../../api/config";
 export const getColumns = (actionsHandler) => {
   return [
+    {
+      field: "profile",
+      headerName: "Profile",
+      renderCell: ({ row }) => {
+        return <Profile img={row.image} />;
+      },
+    },
     {
       field: "username",
       headerName: "Nom d'utilisateur",
@@ -42,7 +50,6 @@ export const getColumns = (actionsHandler) => {
               size="small"
               sx={{ marginInline: 0.3 }}
               onClick={() => {
-                console.log("show row", row);
                 actionsHandler("show", { state: true, payload: row });
               }}
             >
@@ -62,7 +69,6 @@ export const getColumns = (actionsHandler) => {
               variant="contained"
               size="small"
               onClick={() => {
-                console.log("row", row);
                 const { isAdmin, username, _id } = row;
                 actionsHandler("update", {
                   state: true,
@@ -81,6 +87,13 @@ export const getColumns = (actionsHandler) => {
 
 export const getMsgsColumns = (handler) => {
   return [
+    {
+      field: "profile",
+      headerName: "Profile",
+      renderCell: ({ row }) => {
+        return <Profile img={row.user.profile} />;
+      },
+    },
     { field: "username", headerName: "Nom d'utilisateur", width: 170 },
     {
       field: "chat",
@@ -88,7 +101,6 @@ export const getMsgsColumns = (handler) => {
       width: 150,
       valueGetter: ({ row }) => row.chat.title,
       renderCell: ({ row }) => {
-        console.log("row", row);
         return (
           <p className={`${row.chat.isDeleted ? "text-error" : ""}`}>
             {row.chat.title}
@@ -97,36 +109,37 @@ export const getMsgsColumns = (handler) => {
       },
     },
     {
-      field: "message",
-      headerName: "Message Source",
-      width: 150,
-      valueGetter: ({ row }) => (row.message.isUser ? "Input" : "Output"),
+      field: "messages.input",
+      headerName: "Input",
+      width: 170,
+      flex: 0.5,
+      valueGetter: ({ row }) => row.message.input.content,
       renderCell: ({ row }) => {
-        console.log("row", row);
-        const { isUser, isLiked } = row.message;
-        const res = (
-          <div className="w-full cursor-pointer">
-            <span
-              className={`block rounded-lg ${
-                isUser ? "bg-emerald-200" : "bg-sky-200"
-              } max-w-[60px] text-center p-1`}
-            >
-              {isUser ? "Input" : "Output"}
-            </span>
-          </div>
-        );
-        return res;
+        const { content } = row.message.input;
+        const { isDeleted } = row.message;
+        return <p className={`${isDeleted ? "text-error" : ""}`}>{content}</p>;
       },
     },
     {
-      field: "messages",
-      headerName: "Message Content",
-      width: 200,
-      flex: 1,
-      valueGetter: ({ row }) => row.message.content,
+      field: "messages.output",
+      headerName: "Output",
+      width: 170,
+      flex: 0.5,
+      valueGetter: ({ row }) => row.message.output.content,
       renderCell: ({ row }) => {
-        const { content, isDeleted } = row.message;
+        const { content } = row.message.output;
+        const { isDeleted } = row.message;
         return <p className={`${isDeleted ? "text-error" : ""}`}>{content}</p>;
+      },
+    },
+    {
+      field: "isLiked",
+      headerName: "Feedback",
+      width: 95,
+      valueGetter: ({ row }) => row.message.isLiked,
+      renderCell: ({ row }) => {
+        const { isLiked } = row.message;
+        return <Rating value={isLiked} />;
       },
     },
     {
@@ -140,38 +153,40 @@ export const getMsgsColumns = (handler) => {
       },
     },
     {
-      field: "isLiked",
-      headerName: "Feedback",
-      width: 100,
-      valueGetter: ({ row }) => row.message.isLiked,
-      renderCell: ({ row }) => {
-        const { isLiked } = row.message;
-        return <Rating value={isLiked} />;
-      },
-    },
-    {
       field: "Actions",
       headerName: "Actions",
       width: 80,
-      valueGetter: ({ row }) => row.message.content,
       renderCell: ({ row }) => {
         return (
           <Eye
             className="cursor-pointer text-primary"
             size={20}
-            onClick={() =>
+            onClick={() => {
               handler({
                 state: true,
                 payload: {
-                  isUser: row.message.isUser,
+                  username: row.username,
+                  user: row.user,
                   chat: row.chat,
                   message: row.message,
                 },
-              })
-            }
+              });
+            }}
           />
         );
       },
     },
   ];
+};
+
+const Profile = ({ img }) => {
+  return (
+    <div className="w-[35px] h-[35px] rounded-[50%] overflow-hidden">
+      <img
+        src={`${hostName}/images/${img}`}
+        alt="user-profile"
+        className="h-full w-full object-cover m-auto"
+      />
+    </div>
+  );
 };

@@ -1,6 +1,5 @@
 import { ThumbsUp, ThumbsDown, Octagon, XOctagon } from "react-feather";
 export const Rating = ({ value }) => {
-  console.log("rating value", value);
   if (value === 1) {
     return <ThumbsUp size={21} className={` text-success`} />;
     // return "like";

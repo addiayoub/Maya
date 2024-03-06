@@ -19,7 +19,8 @@ export const getData = createAsyncThunk(
       console.log("response.data", response.data);
       const result = {
         isUser: false,
-        data: {
+        isDeleted: false,
+        output: {
           content: response.data.message,
           execution_time: response.data.execution_time_seconds,
           base64Image: response.data.image_data ?? null,

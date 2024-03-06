@@ -39,9 +39,7 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    resetChatSlice: (state) => {
-      state = initialState;
-    },
+    resetChatSlice: () => initialState,
     resetLastMsgId: (state) => {
       state.lastMsgId = null;
     },
@@ -49,7 +47,32 @@ const chatSlice = createSlice({
       state.userInput = payload;
     },
     setChat: (state, { payload }) => {
-      state.chats = [...state.chats, payload];
+      const { isUser } = payload;
+      const msgCount = state.chats.length;
+      const { chats } = current(state);
+      if (isUser) {
+        state.chats = [
+          ...state.chats,
+          {
+            input: payload.input,
+          },
+        ];
+      } else {
+        const message = chats[chats.length - 1];
+        const { output, isDeleted, _id } = payload;
+        state.chats.pop();
+        state.chats = [
+          ...state.chats,
+          {
+            ...message,
+            output,
+            isDeleted,
+            _id,
+          },
+        ];
+        console.log("current message", message);
+      }
+      console.log("chats are payload", msgCount, chats.length, payload, chats);
       localStorage.setItem("currentChats", JSON.stringify(state.chats));
     },
     deleteChat: (state, { payload }) => {
@@ -60,19 +83,10 @@ const chatSlice = createSlice({
       console.log("message index", messageIndex);
       if (messageIndex !== -1) {
         // Delete the current message
-
         state.chats.splice(messageIndex, 1);
-
-        // Check if there is a preceding message
-        if (messageIndex > 0) {
-          // Delete the preceding message
-
-          state.chats.splice(messageIndex - 1, 1);
-        }
       }
       console.log("state.chats", chats, payload);
       localStorage.setItem("currentChats", JSON.stringify(state.chats));
-      // state.chats = [...state.chats, payload];
     },
     setChats: (state, { payload }) => {
       state.chats = [...state.chats, ...payload];
@@ -82,6 +96,7 @@ const chatSlice = createSlice({
     },
     newChat: (state) => {
       state.chats = [];
+      state.currentChat = null;
       localStorage.setItem("currentChats", JSON.stringify([]));
       localStorage.setItem("currentChatId", null);
     },
@@ -105,16 +120,16 @@ const chatSlice = createSlice({
       console.log("handleLikeDislike", payload);
       const { id, value } = payload;
       const { chats } = current(state);
-      const chatIndex = chats.findIndex((item) => item._id === id);
-
-      if (chatIndex !== -1) {
+      const msgIndex = chats.findIndex((msg) => msg._id === id);
+      console.log("the message", chats[msgIndex], state.chats[msgIndex]);
+      if (msgIndex !== -1) {
         // If chat is found, update the likedByUser property immutably
-        state.chats[chatIndex] = {
-          ...state.chats[chatIndex],
-          data: {
-            ...state.chats[chatIndex].data,
+        state.chats[msgIndex] = {
+          ...state.chats[msgIndex],
+          output: {
+            ...state.chats[msgIndex].output,
             likedByUser:
-              state.chats[chatIndex].data.likedByUser === value ? 0 : value,
+              state.chats[msgIndex].output.likedByUser === value ? 0 : value,
           },
         };
       }

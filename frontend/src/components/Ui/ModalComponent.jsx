@@ -25,6 +25,7 @@ export default function ModalComponent({
   withHeader,
   headerText,
   className,
+  containerClasses,
 }) {
   return (
     <div>
@@ -33,7 +34,7 @@ export default function ModalComponent({
         onClose={handleClose}
         className={`overflow-auto ${className}`}
       >
-        <Box sx={{ ...basedStyle, ...style }}>
+        <Box sx={{ ...basedStyle, ...style }} className={`${containerClasses}`}>
           {withHeader && (
             <Box className="mb-3">
               <Box className="flex justify-between items-center mb-1">

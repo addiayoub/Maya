@@ -177,22 +177,16 @@ class _UserController {
     const { chatId } = req.query;
     const { user } = req;
     const loggedInUser = await User.findById(user._id);
-    const userMsg = {
-      isUser: true,
-      data: {
-        content: userInput,
-      },
+    const input = {
+      content: userInput,
     };
-    const aiMsg = {
-      isUser: false,
-      data: {
-        content: aiResponse.message,
-        execution_time: aiResponse.execution_time_seconds,
-        base64Image: aiResponse.image_data ?? null,
-        chartData: aiResponse.csv_data,
-        chartType: aiResponse.visualization_type,
-        likedByUser: 0,
-      },
+    const output = {
+      content: aiResponse.message,
+      execution_time: aiResponse.execution_time_seconds,
+      base64Image: aiResponse.image_data ?? null,
+      chartData: aiResponse.csv_data,
+      chartType: aiResponse.visualization_type,
+      likedByUser: 0,
     };
     console.log("chatId", chatId);
     // Find the chat by its ID
@@ -206,7 +200,10 @@ class _UserController {
         .status(404)
         .json({ success: false, message: "Chat not found." });
     }
-    chat.messages.push(userMsg, aiMsg);
+    chat.messages.push({
+      input,
+      output,
+    });
     await loggedInUser.save();
     const lastMessageId = chat.messages[chat.messages.length - 1]._id;
     res.status(200).json({

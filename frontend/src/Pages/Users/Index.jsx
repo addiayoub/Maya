@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../redux/actions/UserActions";
 import Table from "../../components/Table";
 import { getColumns } from "./columns";
-import { Box, Button, Typography } from "@mui/material";
-import { Mail, MessageCircle, Plus, User } from "react-feather";
+import { Box, Button } from "@mui/material";
+import { Plus } from "react-feather";
 import Create from "./CRUD/Create";
 import Delete from "./CRUD/Delete";
 import Update from "./CRUD/Update";
@@ -70,16 +70,6 @@ const Index = () => {
           setModalOff={() => handleModals("show")}
         />
       )}
-      {/* {data.map((item) => {
-        return (
-          <p key={item._id}>
-            {item.username} - {item.isAdmin ? "Admin" : "User"} - Chats:
-            {item.chats.length}- Deleted Chats :
-            {item.chats.filter((chat) => chat.isDeleted).length}- Deleted
-            messages: {countDeletedMessages(item)}
-          </p>
-        );
-      })} */}
     </Box>
   );
 };

@@ -169,9 +169,9 @@ class _ChatController {
       const message = currentUser.chats[chatIndex].messages.find(
         (msg) => msg._id.toString() === msgId
       );
-      message.data = {
-        ...message.data,
-        likedByUser: message.data.likedByUser === value ? 0 : value,
+      message.output = {
+        ...message.output,
+        likedByUser: message.output.likedByUser === value ? 0 : value,
       };
       await currentUser.save();
       console.log("chat id", chatId);
@@ -210,13 +210,6 @@ class _ChatController {
       }
       // Mark the message as deleted
       currentUser.chats[chatIndex].messages[msgIndex].isDeleted = true;
-
-      // Check if there is a preceding message
-      if (msgIndex > 0) {
-        // Delete the preceding message
-        // Mark the message as deleted
-        currentUser.chats[chatIndex].messages[msgIndex - 1].isDeleted = true;
-      }
 
       // Save the updated user document
       await currentUser.save();
