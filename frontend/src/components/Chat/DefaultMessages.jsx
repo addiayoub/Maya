@@ -2,10 +2,15 @@ import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserInput } from "../../redux/slices/ChatSlice";
 import useHandleGenerate from "../../Hooks/useHandleGenerate";
-import { Clipboard } from "react-feather";
+import { Clipboard, Trash } from "react-feather";
 import "./DefaultMessages.css";
-import { notyf } from "../../utils/notyf";
+import { handleCopy } from "../../utils/handleCopy";
 import { Tooltip } from "@mui/material";
+import { deletePrompt as deletePromptAction } from "../../redux/actions/PromptActions";
+import { deletePrompt } from "../../redux/slices/PromptSlice";
+import { notyf } from "../../utils/notyf";
+import ModalComponent from "../Ui/ModalComponent";
+import DeleteModal from "../Ui/DeleteModal";
 
 const msgs = [
   "quelles sont les fonctionnalités que tu propose?",
@@ -16,7 +21,10 @@ const msgs = [
   "Quelles actions enregistrent actuellement les volumes de transaction les plus importants?",
 ];
 
-const DefaultMessages = ({ messages }) => {
+const DefaultMessages = ({ messages, reset }) => {
+  console.log("default messages", messages);
+  const [open, setOpen] = useState(false);
+  const [id, setId] = useState(null);
   const dispatch = useDispatch();
   const { handleGenerate } = useHandleGenerate();
   const handleClick = async (message) => {
@@ -30,51 +38,74 @@ const DefaultMessages = ({ messages }) => {
       // Handle error
     }
   };
-  const handleCopy = (text) => {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-      document.execCommand("copy");
-      dispatch(setUserInput(text));
-      notyf.success("Copied !");
-    } catch (err) {
-      console.error("Unable to copy to clipboard", err);
+  const handleDeletePrompt = (id) => {
+    console.log("handleDelete prompt", id);
+    dispatch(deletePromptAction({ id }))
+      .unwrap()
+      .then(({ message }) => {
+        notyf.success(message);
+        dispatch(deletePrompt({ id }));
+        reset();
+      })
+      .catch((error) => {
+        notyf.error(error);
+      });
+  };
+  const deleteModal = (confirm) => {
+    if (confirm) {
+      handleDeletePrompt(id);
     }
-    document.body.removeChild(textArea);
+    setOpen(false);
   };
   return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12
+    <>
+      <div
+        className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12
         xl:grid-cols-12 gap-y-4 gap-x-4 items-stretch overflow-y-auto max-h-[300px]"
-    >
-      {messages.map((msg, index) => {
-        return (
-          <div
-            key={index}
-            style={{ border: "1px solid #94a3b8" }}
-            // onMouseOver={() => setShowOptions(true)}
-            onClick={() => handleClick(msg)}
-            className="message cursor-pointer transition ease-in-out hover:shadow-lg rounded-md md:col-span-4 lg:col-span-4 xl:col-span-4 p-3 text-gray-800 font-normal select-none"
-          >
-            {msg}
+      >
+        {messages.map((msg) => {
+          return (
+            <div
+              key={msg._id}
+              onClick={() => handleClick(msg.title)}
+              className="message cursor-pointer transition ease-in-out hover:shadow-lg rounded-md md:col-span-4 lg:col-span-4 xl:col-span-4 p-3 text-gray-800 font-normal select-none border-[1px] border-solid border-slate-400"
+            >
+              {msg.title}
 
-            <Tooltip title="Copier" arrow>
-              <Clipboard
-                size={20}
-                className="copy-icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCopy(msg);
-                }}
-              />
-            </Tooltip>
-          </div>
-        );
-      })}
-    </div>
+              <div className="actions">
+                <Tooltip title="Copier" arrow>
+                  <Clipboard
+                    size={20}
+                    className="copy-icon"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCopy(msg.title);
+                      dispatch(setUserInput(msg.title));
+                    }}
+                  />
+                </Tooltip>
+                <Tooltip title="Supprimer" arrow>
+                  <Trash
+                    className="hover:text-error"
+                    size={20}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setId(msg._id);
+                      setOpen(true);
+                    }}
+                  />
+                </Tooltip>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {open && (
+        <ModalComponent open={open} handleClose={() => setOpen(false)}>
+          <DeleteModal handleDeleteConfirmation={deleteModal} />
+        </ModalComponent>
+      )}
+    </>
   );
 };
 

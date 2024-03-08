@@ -57,3 +57,22 @@ button {
 .echarts-for-react {
   background-color: #fff;
 }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  margin: 20px;
+  color: #373736;
+}
+
+.cards .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 18px;
+  gap: 25px;
+  padding: 30px 18px;
+  border-radius: 5px;
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+}

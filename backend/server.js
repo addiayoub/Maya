@@ -11,6 +11,8 @@ const connectToDb = require("./Config/database");
 const AuthRoutes = require("./Routes/AuthRoutes");
 const UserRoutes = require("./Routes/UserRoutes");
 const ChatRoutes = require("./Routes/ChatRoutes");
+const ConfigRoutes = require("./Routes/ConfigRoutes");
+const PromptRoutes = require("./Routes/PromptRoutes");
 const path = require("path");
 
 // middleware
@@ -33,6 +35,8 @@ connectToDb();
 // Routes
 app.use("/api/auth", AuthRoutes);
 app.use("/api/users", UserRoutes);
+app.use("/api/config", ConfigRoutes);
+app.use("/api/prompts", PromptRoutes);
 app.use("/chats", ChatRoutes);
 
 app.listen(process.env.PORT, () => {

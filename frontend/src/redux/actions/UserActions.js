@@ -15,6 +15,54 @@ export const getUsers = createAsyncThunk(
   }
 );
 
+// Stats
+export const getStats = createAsyncThunk(
+  "user/getStats",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosClient.get("/api/users/stats");
+      console.log("stats", response.data);
+      return response.data.stats;
+    } catch (error) {
+      console.log("Error Get Stats", error);
+      return thunkAPI.rejectWithValue("Server Error");
+    }
+  }
+);
+
+// Config
+export const getConfig = createAsyncThunk(
+  "user/getConfig",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosClient.get("/api/config");
+      console.log("config", response.data);
+      localStorage.setItem("apiAddress", response.data.apiAddress);
+      return response.data.apiAddress;
+    } catch (error) {
+      console.log("Error Get Config", error);
+      return thunkAPI.rejectWithValue("Server Error");
+    }
+  }
+);
+export const setConfig = createAsyncThunk(
+  "user/setConfig",
+  async ({ apiAddress }, thunkAPI) => {
+    try {
+      const response = await axiosClient.post("/api/config", { apiAddress });
+      console.log("config", response.data);
+      localStorage.setItem("apiAddress", response.data.apiAddress);
+      return response.data;
+    } catch (error) {
+      console.log("Error Set Config", error);
+      if (error?.response?.data?.message) {
+        return thunkAPI.rejectWithValue(error?.response?.data?.message);
+      }
+      return thunkAPI.rejectWithValue("Server Error");
+    }
+  }
+);
+
 export const createUser = createAsyncThunk(
   "user/createUser",
   async (user, thunkAPI) => {

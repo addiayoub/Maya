@@ -16,6 +16,8 @@ import TradingChartV2 from "../components/Charts/TradingChartV2";
 import AuthRoutes from "./AuthRoutes";
 import Users from "../Pages/Users/Index";
 import AdminRoutes from "./AdminRoutes";
+import Stats from "../Pages/Stats";
+import Settings from "../Pages/Settings";
 
 export default function RouterProvider() {
   return (
@@ -32,7 +34,9 @@ export default function RouterProvider() {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route element={<AdminRoutes />}>
+            <Route path="/settings" element={<Settings />} />
             <Route path="/users" element={<Users />} />
+            <Route path="/stats" element={<Stats />} />
           </Route>
           <Route element={<LoginRoute />}>
             <Route element={<Login />} path="/login" />

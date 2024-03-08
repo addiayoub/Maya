@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import Table from "../../components/Table";
-import { getMsgsColumns } from "./columns";
 import { transformUsersData } from "../../utils/admin";
 import ChatPreview from "./ChatPreview";
+import { getMsgsColumns } from "./columns";
+import Accordion from "../../components/Ui/Accordion";
 
 const MessagesTable = () => {
   const {
-    users: { data, loading, error },
+    users: { data },
   } = useSelector((state) => state.user);
   const [open, setOpen] = useState({
     state: false,
@@ -20,11 +21,10 @@ const MessagesTable = () => {
   const columns = useMemo(() => getMsgsColumns(setOpen), [data]);
   const handleClose = () => setOpen({ state: false, payload: null });
   return (
-    <div className="">
-      <h3>Messages Table</h3>
+    <Accordion className="my-4" title="Messages Table">
       <Table rows={rows} columns={columns} pageSize={100} />
       <ChatPreview open={open} handleClose={handleClose} />
-    </div>
+    </Accordion>
   );
 };
 

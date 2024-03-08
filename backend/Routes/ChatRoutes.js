@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const chatController = require("../Controllers/ChatController");
 const AuthMiddleware = require("../Middlewares/AuthMiddleware");
-// Create User
 
 router.use(AuthMiddleware);
 router.get("/", chatController.index);

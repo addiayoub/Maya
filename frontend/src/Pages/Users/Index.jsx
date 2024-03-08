@@ -9,7 +9,10 @@ import Create from "./CRUD/Create";
 import Delete from "./CRUD/Delete";
 import Update from "./CRUD/Update";
 import UserDetails from "./CRUD/UserDetails";
-import MessagesTable from "./MessagesTable";
+import MessagesTable from "../Stats/MessagesTable";
+import Stats from "./Stats";
+import ChatsTable from "../Stats/ChatsTable";
+import MainLoader from "../../components/Loaders/MainLoader";
 
 const Index = () => {
   const {
@@ -37,6 +40,7 @@ const Index = () => {
   const columns = getColumns(handleModals);
   return (
     <Box>
+      {loading && <MainLoader />}
       <Button
         variant="contained"
         size="small"
@@ -51,7 +55,6 @@ const Index = () => {
           setModalOff={() => handleModals("create")}
         />
       )}
-      <MessagesTable />
       {modals.delete.state && (
         <Delete
           data={modals.delete}

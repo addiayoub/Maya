@@ -58,3 +58,23 @@ export const transformUsersData = (data) => {
   newData.sort((a, b) => a.username - b.username);
   return newData;
 };
+
+export const transformDataChats = (data) => {
+  const newData = [];
+  // Transform your users' data into rows for the DataGrid
+  data?.forEach((user) => {
+    user?.chats.forEach((chat) => {
+      newData.push({
+        user: {
+          username: user.username,
+          profile: user.image,
+        },
+        chat: { title: chat.title, isDeleted: chat.isDeleted },
+        messagesCount: chat.messages.length,
+      });
+    });
+  });
+  console.log("newData", newData);
+  newData.sort((a, b) => a.username - b.username);
+  return newData;
+};

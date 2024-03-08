@@ -3,7 +3,7 @@ import { Chart } from "../Charts/Chart";
 import Typewriter from "../Typewriter";
 import { useDispatch, useSelector } from "react-redux";
 import MiniLogo from "../../assets/images/mini-logo.png";
-import { Clipboard, Trash } from "react-feather";
+import { Clipboard, Star, Trash } from "react-feather";
 import { deleteChat as deleteMsg } from "../../redux/slices/ChatSlice";
 import { deleteMsg as deleteMsgAction } from "../../redux/actions/ChatActions";
 import { handleCopy } from "../../utils/handleCopy";
@@ -13,6 +13,9 @@ import DeleteModal from "../Ui/DeleteModal";
 import { formatBoldText } from "../../utils/formatBoldText";
 import RatingButtons from "./RatingButtons";
 import { hostName } from "../../api/config";
+import { addPrompt } from "../../redux/slices/PromptSlice";
+import { setPrompt } from "../../redux/actions/PromptActions";
+import { isPromptExists } from "../../utils/isPromptExists";
 
 const Message = ({
   isUser,
@@ -31,6 +34,7 @@ const Message = ({
   const dispatch = useDispatch();
   console.log("isLiked", likedByUser, "isLast", isLast);
   const { user } = useSelector((state) => state.auth);
+  const { prompts } = useSelector((state) => state.prompt);
 
   console.log("content from message", isUser, content);
   useEffect(() => {
@@ -45,6 +49,18 @@ const Message = ({
       .unwrap()
       .then((resp) => console.log("resp", resp))
       .catch((err) => {
+        notyf.error(err);
+      });
+  };
+  const handleAddPrompt = (title) => {
+    dispatch(setPrompt({ title }))
+      .unwrap()
+      .then(({ message, prompt }) => {
+        dispatch(addPrompt(prompt));
+        notyf.success(message);
+      })
+      .catch((err) => {
+        console.log("SetPropmt err", err);
         notyf.error(err);
       });
   };
@@ -127,10 +143,24 @@ const Message = ({
                     </div>
                     {isUser && (
                       <div className="flex gap-2 items-center">
+                        {/* {isPromptExists(prompts, content) ? "True" : "False"} */}
                         <Clipboard
                           onClick={() => handleCopy(content)}
                           size={22}
                           className="hover:text-primary cursor-pointer"
+                        />
+                        <Star
+                          onClick={() => {
+                            if (!isPromptExists(prompts, content)) {
+                              handleAddPrompt(content);
+                            }
+                          }}
+                          size={22}
+                          className={`${
+                            isPromptExists(prompts, content)
+                              ? "fill-yellow-400 text-yellow-400"
+                              : "hover:text-yellow-400 cursor-pointer"
+                          }`}
                         />
                       </div>
                     )}

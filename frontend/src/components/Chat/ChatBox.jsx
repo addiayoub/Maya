@@ -4,13 +4,9 @@ import "./ChatBox.css";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loaders/Loader";
 import Messages from "./Messages";
-import ToggleSidebar from "./ToggleSidebar";
 import ChatBoxHeader from "./ChatBoxHeader";
-import { getChats } from "../../redux/actions/ChatActions";
-import Dropdown from "../Test/DropDown";
-import { Skeleton } from "@mui/material";
 import ChatBoxLoader from "../Loaders/ChatBoxLoader";
-
+import MainLoader from "../Loaders/MainLoader";
 const ChatBox = () => {
   const { loading, data, userInput, chats, getChatLoading } = useSelector(
     (state) => state.chat
@@ -39,10 +35,9 @@ const ChatBox = () => {
       {/* <Dropdown /> */}
       <Messages />
       {getChatLoading && <ChatBoxLoader />}
-
       {/* </div> */}
       <div className="w-full flex justify-center items-center">
-        {loading && <Loader />}
+        {loading && <MainLoader small />}
       </div>
       <InputMessage />
     </div>

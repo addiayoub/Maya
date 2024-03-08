@@ -1,8 +1,23 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { getUsers } from "../actions/UserActions";
+import {
+  getConfig,
+  getStats,
+  getUsers,
+  setConfig,
+} from "../actions/UserActions";
 const initialState = {
   users: {
     data: [],
+    loading: false,
+    error: null,
+  },
+  stats: {
+    data: [],
+    loading: false,
+    error: null,
+  },
+  config: {
+    apiAddress: localStorage.getItem("apiAddress") ?? "",
     loading: false,
     error: null,
   },
@@ -47,6 +62,50 @@ const userSlice = createSlice({
     builder.addCase(getUsers.rejected, ({ users }, { payload }) => {
       users = initialState.users;
       users.error = payload;
+    });
+
+    // Get Stats
+    builder.addCase(getStats.pending, ({ stats }) => {
+      stats.loading = true;
+    });
+
+    builder.addCase(getStats.fulfilled, ({ stats }, { payload }) => {
+      stats.loading = false;
+      stats.data = payload;
+    });
+
+    builder.addCase(getStats.rejected, ({ stats }, { payload }) => {
+      stats = initialState.stats;
+      stats.error = payload;
+    });
+
+    // Get Config
+    builder.addCase(getConfig.pending, ({ config }) => {
+      config.loading = true;
+    });
+
+    builder.addCase(getConfig.fulfilled, ({ config }, { payload }) => {
+      config.loading = false;
+      config.apiAddress = payload;
+    });
+
+    builder.addCase(getConfig.rejected, ({ config }, { payload }) => {
+      config = initialState.config;
+      config.error = payload;
+    });
+    // Set Config
+    builder.addCase(setConfig.pending, ({ config }) => {
+      config.loading = true;
+    });
+
+    builder.addCase(setConfig.fulfilled, ({ config }, { payload }) => {
+      config.loading = false;
+      config.apiAddress = payload.apiAddress;
+    });
+
+    builder.addCase(setConfig.rejected, ({ config }, { payload }) => {
+      config = initialState.config;
+      config.error = payload;
     });
   },
 });

@@ -27,8 +27,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.use(AuthMiddleware);
-// Create User
 router.get("/", userController.index);
+router.get("/stats", userController.getStats);
 router.delete("/", userController.delete);
 router.post("/", userController.store);
 router.put("/", userController.update);

@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import authMiddleware from "./middleware/AuthMiddleware";
 import UserReducer from "./slices/UserSlice";
+import PromptReducer from "./slices/PromptSlice";
 
 // const chatsPersistConfig = {
 //   key: "chats",
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   chat: ChatReducer,
   layout: LayoutReducer,
   user: UserReducer,
+  prompt: PromptReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

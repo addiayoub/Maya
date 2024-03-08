@@ -1,11 +1,11 @@
 const User = require("../Models/UserModel");
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-
+const statsPipelines = require("../utils/statsPipelines");
 class _UserController {
   async index(req, res) {
     try {
       const loggedInUserId = req.user._id;
+
       const users = await User.find({
         _id: { $ne: loggedInUserId },
       }).sort({
@@ -16,7 +16,52 @@ class _UserController {
       res.status(500).json({ error: error.message });
     }
   }
+  async getStats(req, res) {
+    try {
+      const [
+        messagesResult,
+        chatsResult,
+        deletedMessagesByUser,
+        deletedChatsByUser,
+        messageReactions,
+        messageReactionsByUser,
+        deletedUsersRes,
+        totalMessagesRes,
+        totalChatsRes,
+        messagesByUser,
+        chatsByUser,
+      ] = await Promise.all([
+        User.aggregate(statsPipelines.deletedMessages),
+        User.aggregate(statsPipelines.deletedChats),
+        User.aggregate(statsPipelines.deletedMessagesByUser),
+        User.aggregate(statsPipelines.deletedChatsByUser),
+        User.aggregate(statsPipelines.messageReactions),
+        User.aggregate(statsPipelines.messageReactionsByUser),
+        User.aggregate(statsPipelines.deletedUsers),
+        User.aggregate(statsPipelines.totalMessages),
+        User.aggregate(statsPipelines.totalChats),
+        User.aggregate(statsPipelines.messagesByUser),
+        User.aggregate(statsPipelines.chatsByUser),
+      ]);
 
+      const stats = {
+        deletedMessages: messagesResult[0]?.deletedMessages || 0,
+        deletedChats: chatsResult[0]?.deletedChats || 0,
+        deletedMessagesByUser,
+        deletedChatsByUser,
+        messageReactions: messageReactions[0],
+        messageReactionsByUser,
+        deletedUsers: deletedUsersRes[0]?.deletedUsers || 0,
+        totalMessages: totalMessagesRes[0]?.totalMessages || 0,
+        totalChats: totalChatsRes[0]?.totalChats || 0,
+        messagesByUser,
+        chatsByUser,
+      };
+      return res.status(200).json({ stats });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   async delete(req, res) {
     try {
       const { id } = req.query;

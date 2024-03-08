@@ -1,0 +1,278 @@
+.main-loader:not(.small) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-loader.small .modelViewPort {
+  width: calc(20rem / 4) !important;
+}
+
+.modelViewPort {
+  /* The black circle background around the model*/
+  perspective: 1000px;
+  width: 20rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--secondary-color);
+  overflow: hidden;
+  /* small var */
+  --small: 3;
+  /* HEAD */
+  --head-height-g: 4rem;
+  --head-width-g: 6rem;
+
+  /* eyeChamber */
+  --eyeChamber-width-g: 4.5rem;
+  --eyeChamber-height-g: 2.75rem;
+
+  /* EYE */
+  --eye-width-g: 1.2rem;
+  --eye-height-g: 1.5rem;
+  --eye1-left-g: 12px;
+
+  /* BODY */
+  --body-width-g: 6rem;
+  --body-height-g: 8rem;
+
+  /* HAND */
+  --hand-width-g: 2rem;
+  --hand-height-g: 5.5rem;
+  --hand-left-g: -1.5rem;
+
+  /* scannerThing */
+  --scannerThing-border-top-width-g: 180px;
+  --scannerThing-border-left-width-g: 250px;
+  --scannerThing-border-right-width-g: 250px;
+}
+.eva {
+  --EVA-ROTATION-DURATION: 4s;
+  transform-style: preserve-3d;
+  animation: rotateRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+  /* HEAD */
+  --head-height: 4rem;
+  --head-width: 6rem;
+
+  /* eyeChamber */
+  --eyeChamber-width: 4.5rem;
+  --eyeChamber-height: 2.75rem;
+
+  /* EYE */
+  --eye-width: 1.2rem;
+  --eye-height: 1.5rem;
+  --eye1-left: 12px;
+
+  /* BODY */
+  --body-width: 6rem;
+  --body-height: 8rem;
+
+  /* HAND */
+  --hand-width: 2rem;
+  --hand-height: 5.5rem;
+  --hand-left: -1.5rem;
+
+  /* scannerThing */
+  --scannerThing-border-top-width: 180px;
+  --scannerThing-border-left-width: 250px;
+  --scannerThing-border-right-width: 250px;
+}
+
+.main-loader.small .eva {
+  /* HEAD */
+  --head-width: calc(var(--head-width-g) / var(--small));
+  --head-height: calc(var(--head-height-g) / var(--small));
+  --head-left: calc(var(--head-left-g) / var(--small));
+
+  /* eyeChamber */
+  --eyeChamber-width: calc(var(--eyeChamber-width-g) / var(--small));
+  --eyeChamber-height: calc(var(--eyeChamber-height-g) / var(--small));
+
+  /* EYE */
+  --eye-width: calc(var(--eye-width-g) / var(--small));
+  --eye-height: calc(var(--eye-height-g) / var(--small));
+  --eye1-left: calc(var(--eye1-left-g) / var(--small));
+
+  /* BODY */
+  --body-width: calc(var(--body-width-g) / var(--small));
+  --body-height: calc(var(--body-height-g) / var(--small));
+
+  /* HAND */
+  --hand-width: calc(var(--hand-width-g) / var(--small));
+  --hand-height: calc(var(--hand-height-g) / var(--small));
+  --hand-left: calc(var(--hand-left-g) / var(--small));
+
+  /* scannerThing */
+  --scannerThing-border-top-width: calc(
+    var(--scannerThing-border-top-width-g) / var(--small)
+  );
+  --scannerThing-border-left-width: calc(
+    var(--scannerThing-border-left-width-g) / var(--small)
+  );
+  --scannerThing-border-right-width: calc(
+    var(--scannerThing-border-right-width-g) / var(--small)
+  );
+}
+
+.head {
+  position: relative;
+  width: var(--head-width);
+  height: var(--head-height);
+  border-radius: 48% 53% 45% 55% / 79% 79% 20% 22%;
+  background: linear-gradient(to right, white 45%, gray);
+}
+
+.eyeChamber {
+  width: var(--eyeChamber-width);
+  height: var(--eyeChamber-height);
+  position: relative;
+  left: 50%;
+  top: 55%;
+  border-radius: 45% 53% 45% 48% / 62% 59% 35% 34%;
+  background-color: #0c203c;
+  box-shadow: 0px 0px 2px 2px white, inset 0px 0px 0px 2px black;
+  transform: translate(-50%, -50%);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+.eye {
+  width: var(--eye-width);
+  height: var(--eye-height);
+  position: absolute;
+  border-radius: 50%;
+}
+.eye:first-child {
+  left: var(--eye1-left);
+  top: 50%;
+  background: repeating-linear-gradient(
+    65deg,
+    #9bdaeb 0px,
+    #9bdaeb 1px,
+    white 2px
+  );
+  box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+  transform: translate(0, -50%) rotate(-65deg);
+}
+.eye:nth-child(2) {
+  right: var(--eye1-left);
+  top: 50%;
+  background: repeating-linear-gradient(
+    -65deg,
+    #9bdaeb 0px,
+    #9bdaeb 1px,
+    white 2px
+  );
+  box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+  transform: translate(0, -50%) rotate(65deg);
+}
+.body {
+  width: var(--body-width);
+  height: var(--body-height);
+  position: relative;
+  margin-block-start: 0.25rem;
+  border-radius: 47% 53% 45% 55% / 12% 9% 90% 88%;
+  background: linear-gradient(to right, white 35%, gray);
+}
+.hand {
+  position: absolute;
+  left: var(--hand-left);
+  top: 0.75rem;
+  width: var(--hand-width);
+  height: var(--hand-height);
+  border-radius: 40%;
+  background: linear-gradient(to left, white 15%, gray);
+  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.25);
+  transform: rotateY(55deg) rotateZ(10deg);
+}
+.hand:first-child {
+  animation: compensateRotation var(--EVA-ROTATION-DURATION) linear infinite
+    alternate;
+}
+.hand:nth-child(2) {
+  left: 92%;
+  background: linear-gradient(to right, white 15%, gray);
+  transform: rotateY(55deg) rotateZ(-10deg);
+  animation: compensateRotationRight var(--EVA-ROTATION-DURATION) linear
+    infinite alternate;
+}
+.scannerThing {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 60%;
+  top: 10%;
+  border-top: calc(var(--scannerThing-border-top-width)) solid #9bdaeb;
+  border-left: calc(var(--scannerThing-border-left-width)) solid #9bdaeb;
+  border-right: calc(var(--scannerThing-border-right-width)) solid transparent;
+  transform-origin: top left;
+  mask: linear-gradient(to right, white, transparent 35%);
+  animation: glow 2s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+}
+.scannerOrigin {
+  position: absolute;
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  left: 60%;
+  top: 10%;
+  background: #9bdaeb;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite;
+}
+@keyframes rotateRight {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(25deg);
+  }
+}
+@keyframes moveRight {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-40%, -50%);
+  }
+}
+@keyframes compensateRotation {
+  from {
+    transform: rotateY(55deg) rotateZ(10deg);
+  }
+  to {
+    transform: rotatey(30deg) rotateZ(10deg);
+  }
+}
+@keyframes compensateRotationRight {
+  from {
+    transform: rotateY(55deg) rotateZ(-10deg);
+  }
+  to {
+    transform: rotateY(70deg) rotateZ(-10deg);
+  }
+}
+@keyframes glow {
+  from {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  45% {
+    transform: rotate(-25deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
