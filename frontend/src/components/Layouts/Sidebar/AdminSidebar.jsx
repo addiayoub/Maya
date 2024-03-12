@@ -3,7 +3,7 @@ import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "../../../assets/images/Logo.png";
 import { toggleSidebar } from "../../../redux/slices/LayoutSlice";
-import { adminSidebarData } from "./adminSideBarData";
+import { adminSidebarData } from "./adminSidebarData";
 import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
