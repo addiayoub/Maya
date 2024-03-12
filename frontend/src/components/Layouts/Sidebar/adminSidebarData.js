@@ -9,7 +9,7 @@ export const adminSidebarData = [
   },
   {
     icon: Users,
-    title: "Utilisateur",
+    title: "Utilisateurs",
     isPrivate: false,
     link: "users",
   },

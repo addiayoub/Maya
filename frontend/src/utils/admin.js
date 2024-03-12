@@ -8,15 +8,19 @@ export const messagesStats = (data) => {
       if (message.isDeleted) {
         deletedMessagesCount++;
       }
-      if (!message.isDeleted && message.data?.likedByUser === 1) {
+      if (!message.isDeleted && message.output?.likedByUser === 1) {
         likedMessagesCount++;
       }
-      if (!message.isDeleted && message.data?.likedByUser === -1) {
+      if (!message.isDeleted && message.output?.likedByUser === -1) {
         unlikedMessagesCount++;
       }
     });
   });
-
+  console.log("Messages stats", {
+    deletedMessagesCount,
+    likedMessagesCount,
+    unlikedMessagesCount,
+  });
   return { deletedMessagesCount, likedMessagesCount, unlikedMessagesCount };
 };
 
@@ -26,7 +30,7 @@ export const transformUsersData = (data) => {
   // Transform your users' data into rows for the DataGrid
   data?.forEach((user) => {
     user?.chats.forEach((chat) => {
-      console.log(`${user.username}: - chat-${chat.title}`, chat.messages);
+      // console.log(`${user.username}: - chat-${chat.title}`, chat.messages);
       chat.messages.forEach(
         ({
           _id,
