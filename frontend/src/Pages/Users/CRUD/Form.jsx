@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Box, TextField } from "@mui/material";
 import FormLabel from "@mui/material/FormLabel";
 import EndAdorment from "../../../components/Ui/EndAdorment";
@@ -129,4 +129,4 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+export default memo(Form);

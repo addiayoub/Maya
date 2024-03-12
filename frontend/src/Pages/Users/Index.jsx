@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../redux/actions/UserActions";
 import Table from "../../components/Table";
@@ -9,9 +9,6 @@ import Create from "./CRUD/Create";
 import Delete from "./CRUD/Delete";
 import Update from "./CRUD/Update";
 import UserDetails from "./CRUD/UserDetails";
-import MessagesTable from "../Stats/MessagesTable";
-import Stats from "./Stats";
-import ChatsTable from "../Stats/ChatsTable";
 import MainLoader from "../../components/Loaders/MainLoader";
 
 const Index = () => {
@@ -77,4 +74,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default memo(Index);

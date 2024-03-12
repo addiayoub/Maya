@@ -1,8 +1,7 @@
 import React, { memo, useEffect, useState, useRef } from "react";
 import Message from "./Message";
 import { useSelector } from "react-redux";
-import { IconButton } from "@mui/material";
-import { ArrowDown, ChevronDown } from "react-feather";
+import { ArrowDown } from "react-feather";
 const Messages = () => {
   const { chats, lastMsgId } = useSelector((state) => state.chat);
   const lastMsg = useRef(null);
@@ -24,11 +23,9 @@ const Messages = () => {
   }, []);
   useEffect(() => {
     // Scroll to the last message when component updates
-    console.log("INIT");
     scrollToBtm();
   }, [chats]);
   const scrollToBtm = () => {
-    console.log("lastMsg?.current", lastMsg?.current);
     lastMsg?.current?.scrollIntoView({ behavior: "smooth" });
   };
   return (
@@ -42,20 +39,23 @@ const Messages = () => {
               // style={{ width: "calc(100% - 115px)" }}
             >
               {chats.map((item, index) => {
-                console.log("messages Chats map", chats);
+                console.log("Chats map:", chats);
                 const { input, output } = item;
                 return (
                   <React.Fragment key={item._id ?? index}>
-                    {input && <Message isUser content={input.content} />}
+                    {input && (
+                      <Message isUser content={input.content} data={input} />
+                    )}
                     {output && (
                       <Message
                         id={item._id}
-                        content={output.content}
-                        execution_time={output.execution_time}
-                        base64Image={output.base64Image}
-                        chartData={output.chartData}
-                        chartType={output.chartType}
-                        likedByUser={output.likedByUser}
+                        data={output}
+                        // content={output.content}
+                        // execution_time={output.execution_time}
+                        // base64Image={output.base64Image}
+                        // chartData={output.chartData}
+                        // chartType={output.chartType}
+                        // likedByUser={output.likedByUser}
                         isLast={
                           chats.length - 1 === index && item._id === lastMsgId
                         }

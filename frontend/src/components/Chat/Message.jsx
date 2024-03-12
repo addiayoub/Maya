@@ -17,31 +17,22 @@ import { addPrompt } from "../../redux/slices/PromptSlice";
 import { setPrompt } from "../../redux/actions/PromptActions";
 import { isPromptExists } from "../../utils/isPromptExists";
 
-const Message = ({
-  isUser,
-  content,
-  execution_time,
-  base64Image,
-  chartData,
-  chartType,
-  likedByUser,
-  isLast,
-  id,
-}) => {
+const Message = ({ id, data, isUser, isLast }) => {
+  const {
+    content,
+    execution_time,
+    base64Image,
+    chartData,
+    chartType,
+    likedByUser,
+  } = data;
   const [openModal, setOpenModal] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const messageBoxRef = useRef(null);
   const dispatch = useDispatch();
-  console.log("isLiked", likedByUser, "isLast", isLast);
   const { user } = useSelector((state) => state.auth);
   const { prompts } = useSelector((state) => state.prompt);
-
-  console.log("content from message", isUser, content);
-  useEffect(() => {
-    console.log("message box", messageBoxRef);
-    const msgBox = messageBoxRef.current;
-    // msgBox.addEventListener("click", () => alert("Hi"));
-  }, [messageBoxRef]);
+  console.log("Message Data", data);
 
   const handleDelete = (id) => {
     dispatch(deleteMsg(id));
@@ -65,7 +56,6 @@ const Message = ({
       });
   };
   const handleDeleteConfirmation = (confirmation) => {
-    console.log("confirma", confirmation);
     if (confirmation) {
       handleDelete(id);
     }

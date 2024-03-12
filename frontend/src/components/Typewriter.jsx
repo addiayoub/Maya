@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { formatBoldText } from "../utils/formatBoldText";
 import { SkipForward } from "react-feather";
 
@@ -54,4 +54,4 @@ const Typewriter = ({ text, setShowActions }) => {
   );
 };
 
-export default Typewriter;
+export default memo(Typewriter);

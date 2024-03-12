@@ -1,33 +1,21 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import "./InputMessage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInput } from "../../redux/slices/ChatSlice";
 import useHandleGenerate from "../../Hooks/useHandleGenerate";
 import { Tooltip } from "@mui/material";
 const InputMessage = () => {
-  const [message, setMessage] = useState("");
   const { handleGenerate } = useHandleGenerate();
   const { userInput } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-  // const handleGenerate = () => {
-  //   console.log("msg");
-  //   dispatch(setChat({ isUser: true, data: { content: message } }));
-  //   dispatch(setUserInput(message));
-  //   dispatch(getData({ message }))
-  //     .unwrap()
-  //     .then((successValue) => {
-  //       console.log("successValue", successValue);
-  //       const { isUser, data } = successValue;
-  //       dispatch(setChat({ isUser, data }));
-  //     })
-  //     .catch((error) => console.log(error));
-  //   setMessage("");
-  // };
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      console.log("userInput", userInput);
-      onClickHandler();
+    console.log("userInput", userInput.length);
+    if (userInput.trim().length > 0) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        console.log("userInput", userInput);
+        onClickHandler();
+      }
     }
   };
   const onClickHandler = async () => {
@@ -38,6 +26,16 @@ const InputMessage = () => {
       console.log(error);
       // Handle error
     }
+  };
+  const setTextAreaHeight = () => {
+    const lineHeight = 43;
+    const minRows = 1;
+    const maxRows = 15;
+
+    const currentRows = Math.floor((userInput.length * 0.9) / 40) + 1;
+    const result =
+      Math.min(maxRows, Math.max(minRows, currentRows)) * lineHeight;
+    return result;
   };
   return (
     <div className="w-full pt-2 md:pt-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:w-[calc(100%-.5rem)] sticky left-0 top-0 z-10 bg-white">
@@ -53,15 +51,16 @@ const InputMessage = () => {
             onKeyDown={handleKeyDown}
             value={userInput}
             placeholder="Message MAYA GPT..."
-            className="m-0 w-full resize-none border-0 bg-transparent py-[10px] pr-10  dark:bg-transparent md:py-3.5 md:pr-12 placeholder-black/50 dark:placeholder-white/50 pl-3 md:pl-4"
+            className="m-0 w-full resize-none border-0 bg-transparent py-[10px] pr-10  dark:bg-transparent md:py-3.5 md:pr-12 placeholder-black/50 dark:placeholder-white/50 pl-3 md:pl-4 max-h-[25dvh]"
             // style={{ maxHeight: "200px", height: "652px" }}
+            style={{ height: setTextAreaHeight() }}
           ></textarea>
           <Tooltip arrow title="Envoyer un message" placement="top">
-            <span className="absolute md:bottom-3 md:right-3 right-2">
+            <span className="absolute bottom-2.5 md:right-3 right-2">
               <button
                 className="bg-black  dark:hover:bg-white  disabled:opacity-10 disabled:text-gray-400 enabled:bg-black text-white p-0.5 border border-black rounded-lg dark:border-white dark:bg-white bottom-1.5 transition-colors flex items-center justify-center"
                 onClick={onClickHandler}
-                disabled={!userInput}
+                disabled={!userInput.trim()}
                 data-testid="send-button"
               >
                 <span className="" data-state="closed">

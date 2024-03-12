@@ -90,6 +90,26 @@
   height: calc(100% - 150px);
 }
 
+#sidebar .sidebar-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+#sidebar .sidebar-body::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+#sidebar .sidebar-body::-webkit-scrollbar-track,
+#sidebar .sidebar-body::-webkit-scrollbar,
+#sidebar .sidebar-body::-webkit-scrollbar-thumb {
+  visibility: hidden;
+  transition: visibility 0.3s ease;
+}
+
+#sidebar .sidebar-body:hover::-webkit-scrollbar-track,
+#sidebar .sidebar-body:hover::-webkit-scrollbar,
+#sidebar .sidebar-body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
 .nav-link {
   display: -webkit-flex;
   display: flex;

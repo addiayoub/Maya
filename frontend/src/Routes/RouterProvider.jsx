@@ -36,7 +36,7 @@ export default function RouterProvider() {
           <Route element={<AdminRoutes />}>
             <Route path="/settings" element={<Settings />} />
             <Route path="/users" element={<Users />} />
-            <Route path="/stats" element={<Stats />} />
+            <Route path="/statistiques" element={<Stats />} />
           </Route>
           <Route element={<LoginRoute />}>
             <Route element={<Login />} path="/login" />

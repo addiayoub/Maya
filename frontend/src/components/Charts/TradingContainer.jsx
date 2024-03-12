@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Trading from "./Trading";
 import BarChart from "./BarChart";
 import TradingChartV2 from "./TradingChartV2";
@@ -12,4 +12,4 @@ const TradingContainer = ({ data }) => {
   );
 };
 
-export default TradingContainer;
+export default memo(TradingContainer);

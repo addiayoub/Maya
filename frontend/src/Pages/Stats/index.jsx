@@ -6,6 +6,32 @@ import MainLoader from "../../components/Loaders/MainLoader";
 import MessagesTable from "./MessagesTable";
 import ChatsTable from "./ChatsTable";
 import { LineChart, PieChart } from "./Charts";
+
+const msgDD = [
+  {
+    _id: "65e7373519914d9f21281605",
+    username: "Fouad",
+    count: 4,
+  },
+  {
+    _id: "65e73ba219914d9f21281607",
+    username: "younes",
+    count: 7,
+  },
+];
+const chatDD = [
+  {
+    _id: "65e7373519914d9f21281605",
+    username: "Fouad",
+    count: 8,
+  },
+  {
+    _id: "65e73ba219914d9f21281607",
+    username: "younes",
+    count: 3,
+  },
+];
+
 const Stats = () => {
   const {
     stats: { data, loading },
@@ -62,30 +88,7 @@ const Stats = () => {
       },
     ];
   }, [data]);
-  const msgDD = [
-    {
-      _id: "65e7373519914d9f21281605",
-      username: "Fouad",
-      count: 4,
-    },
-    {
-      _id: "65e73ba219914d9f21281607",
-      username: "younes",
-      count: 7,
-    },
-  ];
-  const chatDD = [
-    {
-      _id: "65e7373519914d9f21281605",
-      username: "Fouad",
-      count: 8,
-    },
-    {
-      _id: "65e73ba219914d9f21281607",
-      username: "younes",
-      count: 3,
-    },
-  ];
+
   return (
     <div>
       {isLoading && <MainLoader />}
@@ -110,8 +113,14 @@ const Stats = () => {
         })}
       </div>
       <div className="flex gap-2">
-        <PieChart data={chatDD ?? []} title="Chats supprimées" />
-        <PieChart data={msgDD ?? []} title="Messages supprimés" />
+        <PieChart
+          data={data.deletedChatsByUser ?? [] ?? []}
+          title="Chats supprimées"
+        />
+        <PieChart
+          data={data.deletedMessagesByUser ?? [] ?? []}
+          title="Messages supprimés"
+        />
       </div>
       <div className="flex gap-2">
         <PieChart data={data.chatsByUser ?? []} title="Chats par utilisateur" />

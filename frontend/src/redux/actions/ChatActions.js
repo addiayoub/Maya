@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../api/api";
+import api, { createApiConfig } from "../../api/api";
 import { storeMessage } from "./UserActions";
 import axiosClient from "../../api/axiosClient";
 
@@ -9,9 +9,10 @@ export const getData = createAsyncThunk(
     const { currentChat } = thunkAPI.getState().chat;
     const { prevMessages } = thunkAPI.getState().chat;
     const chatslice = thunkAPI.getState().chat;
+    const API = createApiConfig();
     console.log("chatslice", chatslice);
     try {
-      const response = await api.post(`POST/get_data/`, prevMessages, {
+      const response = await API.post(`POST/get_data/`, prevMessages, {
         params: {
           user_input: message,
         },

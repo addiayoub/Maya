@@ -26,6 +26,7 @@ export const transformUsersData = (data) => {
   // Transform your users' data into rows for the DataGrid
   data?.forEach((user) => {
     user?.chats.forEach((chat) => {
+      console.log(`${user.username}: - chat-${chat.title}`, chat.messages);
       chat.messages.forEach(
         ({
           _id,

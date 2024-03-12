@@ -1,5 +1,5 @@
+import React, { memo } from "react";
 import { Skeleton } from "@mui/material";
-import React from "react";
 
 const SidebarLoader = () => {
   return (
@@ -23,4 +23,4 @@ const SidebarLoader = () => {
   );
 };
 
-export default SidebarLoader;
+export default memo(SidebarLoader);

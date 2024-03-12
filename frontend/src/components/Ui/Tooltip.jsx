@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const Tooltip = ({ tooltipText, children }) => {
   return (
@@ -22,4 +22,4 @@ const Tooltip = ({ tooltipText, children }) => {
   );
 };
 
-export default Tooltip;
+export default memo(Tooltip);

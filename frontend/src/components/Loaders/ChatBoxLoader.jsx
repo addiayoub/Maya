@@ -1,5 +1,5 @@
 import { Skeleton, Stack } from "@mui/material";
-import React from "react";
+import React, { memo } from "react";
 
 const ChatBoxLoader = () => {
   return (
@@ -60,4 +60,4 @@ const ChatBoxLoader = () => {
   );
 };
 
-export default ChatBoxLoader;
+export default memo(ChatBoxLoader);

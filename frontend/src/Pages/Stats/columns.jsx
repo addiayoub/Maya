@@ -16,48 +16,46 @@ export const getMsgsColumns = (handler) => {
     {
       field: "chat",
       headerName: "Chat Title",
-      width: 150,
+      width: 120,
       valueGetter: ({ row }) => row.chat.title,
       renderCell: ({ row }) => {
-        return (
-          <p className={`${row.chat.isDeleted ? "text-error" : ""}`}>
-            {row.chat.title}
-          </p>
-        );
+        return <p className={``}>{row.chat.title}</p>;
       },
     },
     {
       field: "messages.input",
       headerName: "Input",
       width: 170,
-      flex: 0.5,
+      flex: 1,
       valueGetter: ({ row }) => row.message.input.content,
       renderCell: ({ row }) => {
         const { content } = row.message.input;
-        const { isDeleted } = row.message;
-        return <p className={`${isDeleted ? "text-error" : ""}`}>{content}</p>;
+        return <p className={``}>{content}</p>;
       },
     },
     {
       field: "messages.output",
       headerName: "Output",
       width: 170,
-      flex: 0.5,
+      flex: 1,
       valueGetter: ({ row }) => row.message.output.content,
       renderCell: ({ row }) => {
         const { content } = row.message.output;
-        const { isDeleted } = row.message;
-        return <p className={`${isDeleted ? "text-error" : ""}`}>{content}</p>;
+        return <p className={``}>{content}</p>;
       },
     },
     {
       field: "isLiked",
       headerName: "Feedback",
       width: 95,
-      valueGetter: ({ row }) => row.message.isLiked,
+      headerAlign: "center",
       renderCell: ({ row }) => {
         const { isLiked } = row.message;
-        return <Rating value={isLiked} />;
+        return (
+          <span className="min-w-[50px] max-w-[95px] flex items-center justify-center">
+            <Rating value={isLiked} />
+          </span>
+        );
       },
     },
     {

@@ -1,5 +1,4 @@
-import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import ModalComponent from "../../../components/Ui/ModalComponent";
 import { createUser } from "../../../redux/actions/UserActions";
@@ -14,7 +13,7 @@ const modalStyle = {
   maxWidth: "400px",
 };
 
-export default function Create({ open, setModalOff }) {
+function Create({ open, setModalOff }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -84,3 +83,4 @@ export default function Create({ open, setModalOff }) {
     </ModalComponent>
   );
 }
+export default memo(Create);

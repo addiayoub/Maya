@@ -6,8 +6,6 @@ import { ThumbsUp, ThumbsDown } from "react-feather";
 
 const RatingButtons = ({ value, id }) => {
   const { chats } = useSelector((state) => state.chat);
-  console.log("your chats", chats);
-  console.log("rateValue is", value);
   const dispatch = useDispatch();
   const handleClick = (value) => {
     dispatch(handleLikeDislike({ id, value }));

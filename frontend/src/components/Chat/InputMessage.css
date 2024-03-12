@@ -3,3 +3,7 @@
   border: 1px solid #ccc;
   min-height: 80px;
 }
+
+.message textarea::-webkit-scrollbar {
+  width: 6px;
+}

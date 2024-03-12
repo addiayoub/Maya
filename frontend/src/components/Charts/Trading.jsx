@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { memo, useMemo } from "react";
 import TradingChart from "./TradingChart";
 import {
   calculateMA,
@@ -228,4 +228,4 @@ const Trading = ({ data }) => {
   );
 };
 
-export default Trading;
+export default memo(Trading);

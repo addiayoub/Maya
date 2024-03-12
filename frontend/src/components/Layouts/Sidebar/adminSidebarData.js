@@ -1,9 +1,9 @@
-import { BarChart2, Users, Settings } from "react-feather";
+import { BarChart2, Users, Settings, Tool } from "react-feather";
 
 export const adminSidebarData = [
   {
-    icon: Settings,
-    title: "Settings",
+    icon: Tool,
+    title: "Paramètres",
     isPrivate: false,
     link: "settings",
   },
@@ -17,6 +17,6 @@ export const adminSidebarData = [
     icon: BarChart2,
     title: "Statistique",
     isPrivate: false,
-    link: "stats",
+    link: "statistiques",
   },
 ];

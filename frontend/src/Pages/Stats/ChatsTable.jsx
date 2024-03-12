@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
 import Table from "../../components/Table";
 import { transformDataChats } from "../../utils/admin";
@@ -17,4 +17,4 @@ const ChatsTable = () => {
   );
 };
 
-export default ChatsTable;
+export default memo(ChatsTable);

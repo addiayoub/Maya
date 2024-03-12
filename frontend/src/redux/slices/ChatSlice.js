@@ -39,7 +39,21 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    resetChatSlice: () => initialState,
+    resetChatSlice: (state) => {
+      (state.userInput = ""),
+        (state.chats = []),
+        (state.currentChat = null),
+        (state.chatsHistory = []),
+        (state.data = []),
+        (state.getChatLoading = false),
+        (state.loading = false),
+        (state.error = null),
+        (state.lastMsgId = null),
+        (state.prevMessages = {
+          messages: [],
+          messages_categorie: [],
+        });
+    },
     resetLastMsgId: (state) => {
       state.lastMsgId = null;
     },

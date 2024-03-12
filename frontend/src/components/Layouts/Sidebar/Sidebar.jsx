@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { IconButton, TextField, Tooltip } from "@mui/material";
@@ -186,7 +186,6 @@ const Sidebar = () => {
           <ul className="side-menu ">
             {isLoading && <SidebarLoader />}
             {displayChatsHistory.map(({ title, _id: id }) => {
-              console.log(`${title} : ${id}`);
               return (
                 <li
                   onClick={() => handleGetChat(id)}
@@ -257,4 +256,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);

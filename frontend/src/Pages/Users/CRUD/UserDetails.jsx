@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Box, Typography } from "@mui/material";
 import { Mail, MessageCircle, ThumbsDown, ThumbsUp, User } from "react-feather";
 import ModalComponent from "../../../components/Ui/ModalComponent";
@@ -75,4 +75,4 @@ const UserDetails = ({ data, setModalOff }) => {
   );
 };
 
-export default UserDetails;
+export default memo(UserDetails);

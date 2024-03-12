@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import ModalComponent from "../../../components/Ui/ModalComponent";
 import { updateUser as updateUserAction } from "../../../redux/actions/UserActions";
@@ -13,7 +13,7 @@ const modalStyle = {
   maxWidth: "400px",
 };
 
-export default function Update({ data, setModalOff }) {
+function Update({ data, setModalOff }) {
   const { state, payload } = data;
   console.log("update data", data);
   const [username, setUsername] = useState(payload.username);
@@ -86,3 +86,4 @@ export default function Update({ data, setModalOff }) {
     </ModalComponent>
   );
 }
+export default memo(Update);

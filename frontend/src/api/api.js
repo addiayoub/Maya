@@ -1,20 +1,25 @@
 import axios from "axios";
-const apiUrl = "http://192.168.11.2:30000/MAYAGPT/";
 
-const apiNewMarko = axios.create({
-  baseURL: apiUrl,
-  // withCredentials: true,
-  responseType: "json",
-  paramsSerializer: {
-    indexes: null,
-    encode: (param) => encodeURIComponent(param).replaceAll("%24", "$"),
-  },
-});
+const getApiAddress = () => localStorage.getItem("apiAddress");
 
-apiNewMarko.interceptors.request.use((config) => {
-  config.headers.Accept = `application/json`;
+export const createApiConfig = () => {
+  const apiConfig = axios.create({
+    baseURL: `${getApiAddress()}/MAYAGPT/`,
+    responseType: "json",
+    paramsSerializer: {
+      indexes: null,
+      encode: (param) => encodeURIComponent(param).replaceAll("%24", "$"),
+    },
+  });
 
-  return config;
-});
+  apiConfig.interceptors.request.use((config) => {
+    config.headers.Accept = `application/json`;
+    return config;
+  });
 
-export default apiNewMarko;
+  return apiConfig;
+};
+
+const apiConfig = createApiConfig();
+
+export default apiConfig;

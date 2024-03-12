@@ -3,6 +3,5 @@ export const isPromptExists = (prompts, title) => {
   const exists = prompts.find(
     (prompt) => prompt.title.toLowerCase() === title.toLowerCase()
   );
-  console.log("exist from isPromptExists", exists);
   return exists;
 };

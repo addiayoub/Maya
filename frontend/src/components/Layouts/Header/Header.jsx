@@ -1,5 +1,5 @@
-import { IconButton } from "@mui/material";
 import React, { memo, useState } from "react";
+import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../../redux/slices/AuthSlice";
@@ -11,7 +11,6 @@ import {
   ChevronsLeft,
   ChevronsRight,
   LogOut,
-  UserCheck,
   User,
 } from "react-feather";
 import { toggleSidebar } from "../../../redux/slices/LayoutSlice";
@@ -25,20 +24,20 @@ function Header() {
   const [openProfile, setOpenProfile] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  // const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const handelLogout = (e) => {
     e.preventDefault();
-    dispatch(logout());
     dispatch(resetChatSlice());
+    dispatch(logout());
     notyf.success("Vous avez été déconnecté avec succès.");
   };
   return (
     <>
       <header className="header">
         <div
-          // className={`menu-icon ${isOpen ? "opened" : "closed"}  toggle-sidebar`}
-          className={`menu-icon toggle-sidebar`}
+          className={`menu-icon ${
+            isOpen ? "opened" : "closed"
+          }  toggle-sidebar`}
         >
           <IconButton onClick={() => dispatch(toggleSidebar(!isOpen))}>
             {isOpen ? <ChevronsLeft /> : <ChevronsRight />}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ModalComponent from "../../../components/Ui/ModalComponent";
 import DeleteModal from "../../../components/Ui/DeleteModal";
 import { useDispatch } from "react-redux";
@@ -33,4 +33,4 @@ const Delete = ({ data, setModalOff }) => {
   );
 };
 
-export default Delete;
+export default memo(Delete);

@@ -14,7 +14,7 @@ const useHandleGenerate = () => {
   const handleGenerate = async (message) => {
     try {
       console.log("msg", message);
-      dispatch(setChat({ isUser: true, input: { content: message } }));
+      dispatch(setChat({ isUser: true, input: { content: message.trim() } }));
       dispatch(setUserInput(""));
       if (chats.length < 1) {
         const title = "Chat " + Math.floor(Math.random() * 100);

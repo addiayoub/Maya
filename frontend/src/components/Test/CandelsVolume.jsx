@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, memo } from "react";
 import data from "./tradingData.json";
 import ReactECharts from "echarts-for-react";
 import {
@@ -284,4 +284,4 @@ const CandelsVolume = () => {
   );
 };
 
-export default CandelsVolume;
+export default memo(CandelsVolume);

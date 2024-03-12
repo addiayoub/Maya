@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 
 const Messages = () => {
@@ -27,4 +27,4 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default memo(Messages);

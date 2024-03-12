@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box, ChevronDown, ChevronUp, Copy } from "react-feather";
+import React, { useState, useEffect, memo } from "react";
+import { Box, ChevronDown, ChevronUp } from "react-feather";
 import DefaultMessages from "./DefaultMessages";
 import { MESSAGES } from "../../data/meassages";
 import { IconButton, Tooltip, TextField } from "@mui/material";
@@ -7,6 +7,7 @@ import logo from "../../assets/images/mini-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getPrompts } from "../../redux/actions/PromptActions";
 import { isInLocalStorage } from "../../utils/isInLoacalStorage";
+import MainLoader from "../Loaders/MainLoader";
 
 const defaultMessages1 = [
   { _id: 1, title: "Bonjour" },
@@ -125,7 +126,7 @@ const ChatBoxHeader = () => {
         </div>
         <div className="flex gap-2 pr-1"></div>
       </div>
-      {loading && <h3>Loading...</h3>}
+      {loading && <MainLoader small />}
       {!loading && isShow && (
         <DefaultMessages messages={randomItems} reset={reset} />
       )}
@@ -133,4 +134,4 @@ const ChatBoxHeader = () => {
   );
 };
 
-export default ChatBoxHeader;
+export default memo(ChatBoxHeader);

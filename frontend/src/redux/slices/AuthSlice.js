@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login } from "../actions/AuthActions";
 import Cookies from "js-cookie";
-// import { setPath } from "./DashboardSlice";
 
 const initialState = {
   loading: false,

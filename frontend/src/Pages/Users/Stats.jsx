@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { memo, useEffect, useMemo } from "react";
 import { Mail, MessageCircle, ThumbsDown, ThumbsUp, User } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import ReactECharts from "echarts-for-react";
@@ -7,6 +7,7 @@ import { getUsers } from "../../redux/actions/UserActions";
 import MainLoader from "../../components/Loaders/MainLoader";
 import MessagesTable from "../Stats/MessagesTable";
 import ChatsTable from "../Stats/ChatsTable";
+
 const Stats = () => {
   const {
     users: { stats, loading },
@@ -69,7 +70,7 @@ const Stats = () => {
     {
       _id: "65e73ba219914d9f21281607",
       username: "younes",
-      count: 7,
+      count: 71,
     },
   ];
   const chatDD = [
@@ -84,6 +85,7 @@ const Stats = () => {
       count: 3,
     },
   ];
+  console.log("Messages sup", stats?.deletedMessagesByUser);
   return (
     <div>
       {loading && <MainLoader />}
@@ -108,8 +110,14 @@ const Stats = () => {
         })}
       </div>
       <div className="flex gap-2">
-        <PieChart data={chatDD ?? []} title="Chats supprimées" />
-        <PieChart data={msgDD ?? []} title="Messages supprimés" />
+        <PieChart
+          data={stats.deletedChatsByUser ?? []}
+          title="Chats supprimées"
+        />
+        <PieChart
+          data={stats.deletedMessagesByUser ?? []}
+          title="Messages supprimés"
+        />
       </div>
       <div className="flex gap-2">
         <PieChart
@@ -128,7 +136,8 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+export default memo(Stats);
+
 const PieChart = ({ data, title }) => {
   const option = {
     title: {

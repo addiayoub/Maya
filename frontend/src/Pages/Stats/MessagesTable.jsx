@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import Table from "../../components/Table";
 import { transformUsersData } from "../../utils/admin";
@@ -28,4 +28,4 @@ const MessagesTable = () => {
   );
 };
 
-export default MessagesTable;
+export default memo(MessagesTable);
