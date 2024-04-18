@@ -262,7 +262,6 @@ class _UserController {
   async updateProfile(req, res) {
     const { username, password, passwordConfirmation } = req.body;
     const { user } = req;
-    // console.log("req.file", req.file);
     // console.log("file", req);
     const currentUser = await User.findById(user._id);
     let newInfos = { username };
@@ -320,9 +319,6 @@ class _UserController {
       message: "Vos informations ont été mises à jour avec succès",
       user: newUser,
     });
-    // return res.status(200).json({
-    //   user: currentUser,
-    // });
   }
 }
 const userController = new _UserController();

@@ -11,7 +11,7 @@ const ChatsTable = () => {
   } = useSelector((state) => state.user);
   const rows = transformDataChats(data);
   return (
-    <Accordion title="Chats table">
+    <Accordion title="Chats table" isExpanded>
       <Table columns={chatsColumns} rows={rows} pageSize={25} />
     </Accordion>
   );

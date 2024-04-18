@@ -21,7 +21,7 @@ const MessagesTable = () => {
   const columns = useMemo(() => getMsgsColumns(setOpen), [data]);
   const handleClose = () => setOpen({ state: false, payload: null });
   return (
-    <Accordion className="my-4" title="Messages Table">
+    <Accordion className="my-4" title="Messages Table" isExpanded>
       <Table rows={rows} columns={columns} pageSize={100} />
       <ChatPreview open={open} handleClose={handleClose} />
     </Accordion>

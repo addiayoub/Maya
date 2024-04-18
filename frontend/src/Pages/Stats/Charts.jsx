@@ -103,3 +103,71 @@ export const LineChart = ({ data }) => {
     <ReactECharts option={option} style={{ height: "400px", width: "100%" }} />
   );
 };
+export const BarChart = ({ data }) => {
+  const {
+    dataZoom: zoom,
+    toolbox: {
+      feature: { saveAsImage, dataZoom, restore },
+    },
+  } = defaultOptions;
+  const option = {
+    title: {
+      text: "Messages Reactions",
+      x: "center",
+    },
+    tooltip: {
+      trigger: "axis",
+    },
+    legend: {
+      data: ["Neutre", "Like", "Dislike"],
+      top: 30,
+    },
+    xAxis: {
+      type: "category",
+      data: data.map((item) => item.username),
+      axisLabel: {
+        hideOverlap: true,
+      },
+    },
+    yAxis: {
+      type: "value",
+      min: "dataMin",
+      axisLabel: {
+        hideOverlap: true,
+      },
+      splitLine: {
+        show: false,
+      },
+    },
+    toolbox: {
+      feature: {
+        saveAsImage,
+        dataZoom,
+        restore,
+      },
+      top: "20px",
+    },
+    series: [
+      {
+        name: "Neutre",
+        type: "bar", // Change type to "bar"
+        data: data.map((item) => item.nullCount),
+      },
+      {
+        name: "Like",
+        type: "bar", // Change type to "bar"
+        data: data.map((item) => item.likeCount),
+      },
+      {
+        name: "Dislike",
+        type: "bar", // Change type to "bar"
+        data: data.map((item) => item.dislikeCount),
+      },
+    ],
+    dataZoom: zoom,
+  };
+
+  return (
+    <ReactECharts option={option} style={{ height: "400px", width: "100%" }} />
+  );
+};

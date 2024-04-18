@@ -45,10 +45,22 @@ export const getMsgsColumns = (handler) => {
       },
     },
     {
+      field: "messages.output.execution_time",
+      headerName: "Execution time",
+      width: 200,
+      flex: 1,
+      valueGetter: ({ row }) => row.message.output.execution_time,
+      renderCell: ({ row }) => {
+        const value = row.message.output.execution_time;
+        return <p className={``}>{value}s</p>;
+      },
+    },
+    {
       field: "isLiked",
       headerName: "Feedback",
       width: 95,
       headerAlign: "center",
+      valueGetter: ({ row }) => row.message.isLiked,
       renderCell: ({ row }) => {
         const { isLiked } = row.message;
         return (

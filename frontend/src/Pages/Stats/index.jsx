@@ -5,7 +5,7 @@ import { getStats, getUsers } from "../../redux/actions/UserActions";
 import MainLoader from "../../components/Loaders/MainLoader";
 import MessagesTable from "./MessagesTable";
 import ChatsTable from "./ChatsTable";
-import { LineChart, PieChart } from "./Charts";
+import { BarChart, LineChart, PieChart } from "./Charts";
 
 const msgDD = [
   {
@@ -129,7 +129,8 @@ const Stats = () => {
           title="Messages par utilisateur"
         />
       </div>
-      <LineChart data={data.messageReactionsByUser ?? []} />
+      {/* <LineChart data={data.messageReactionsByUser ?? []} /> */}
+      <BarChart data={data.messageReactionsByUser ?? []} />
       <MessagesTable />
       <ChatsTable />
     </div>

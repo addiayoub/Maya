@@ -17,6 +17,7 @@ import { lightTheme } from "../utils/theme";
 // import { ThemeProvider } from "@mui/material/styles";
 import Logo from "../assets/images/Logo.png";
 import EndAdorment from "../components/Ui/EndAdorment";
+import { LogIn } from "react-feather";
 
 function Copyright(props) {
   return (
@@ -136,8 +137,15 @@ function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 disabled={loading}
+                className="flex flex-wrap gap-2 items-center"
               >
-                {loading ? "Veuillez patienter..." : "Connexion"}
+                {loading ? (
+                  "Veuillez patienter..."
+                ) : (
+                  <>
+                    <span>Connexion</span> <LogIn size={20} />
+                  </>
+                )}
               </Button>
               {error && <Alert severity="error">{error}</Alert>}
             </Box>

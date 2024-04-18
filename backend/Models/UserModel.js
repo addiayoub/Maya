@@ -97,7 +97,10 @@ const userSchema = new mongoose.Schema(
 userSchema.index(
   { username: 1 },
   {
-    unique: [true, "Ce nom d'utilisateur est déjà pris. Veuillez en bla bla."],
+    unique: [
+      true,
+      "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.",
+    ],
 
     partialFilterExpression: {
       isDeleted: false,

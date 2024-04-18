@@ -15,7 +15,7 @@ export const adminSidebarData = [
   },
   {
     icon: BarChart2,
-    title: "Statistique",
+    title: "Statistiques",
     isPrivate: false,
     link: "statistiques",
   },
