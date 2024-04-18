@@ -37,6 +37,7 @@ const Index = () => {
   const columns = getColumns(handleModals);
   return (
     <Box>
+      {loading ? "LOADING" : "NOT LOADING"}
       {loading && <MainLoader />}
       <Button
         variant="contained"

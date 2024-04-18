@@ -60,8 +60,8 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getUsers.rejected, ({ users }, { payload }) => {
-      users = initialState.users;
-      users.error = payload;
+      users.loading = false;
+      users = { ...initialState.users, error: payload };
     });
 
     // Get Stats
