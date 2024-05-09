@@ -24,67 +24,42 @@ const Stats = () => {
       //   icon: <User size={20} className="text-error" />,
       // },
       {
-        title: "Total Chats",
+        title: "Chats Totals",
         value: stats.totalChats,
         icon: <MessageCircle size={20} className="text-success" />,
       },
       {
-        title: "Deleted Chats",
+        title: "Chats Supprimés",
         value: stats.deletedChats,
         icon: <MessageCircle size={20} className="text-error" />,
       },
       {
-        title: "Total Messages",
+        title: "Messages Totals",
         value: stats.totalMessages,
         icon: <Mail size={20} className="text-success" />,
       },
       {
-        title: "Deleted Messages",
+        title: "Messages Supprimés",
         value: stats.deletedMessages,
         icon: <Mail size={20} className="text-error" />,
       },
       {
-        title: "Liked Messages",
+        title: "Messages Appréciés",
         value: stats.messageReactions?.likeCount,
         icon: <ThumbsUp size={20} className="text-success" />,
       },
       {
-        title: "UnLiked Messages",
+        title: "Messages Non Appréciés",
         value: stats.messageReactions?.dislikeCount,
-
         icon: <ThumbsDown size={20} className="text-error" />,
       },
       {
-        title: "Neutral Messages",
+        title: "Messages Neutres",
         value: stats.messageReactions?.nullCount,
         icon: "-",
       },
     ];
   }, [stats]);
-  const msgDD = [
-    {
-      _id: "65e7373519914d9f21281605",
-      username: "Fouad",
-      count: 4,
-    },
-    {
-      _id: "65e73ba219914d9f21281607",
-      username: "younes",
-      count: 71,
-    },
-  ];
-  const chatDD = [
-    {
-      _id: "65e7373519914d9f21281605",
-      username: "Fouad",
-      count: 8,
-    },
-    {
-      _id: "65e73ba219914d9f21281607",
-      username: "younes",
-      count: 3,
-    },
-  ];
   console.log("Messages sup", stats?.deletedMessagesByUser);
   return (
     <div>

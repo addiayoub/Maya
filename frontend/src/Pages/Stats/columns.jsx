@@ -133,7 +133,7 @@ export const chatsColumns = [
   },
   {
     field: "messagesCount",
-    headerName: "Messages Count",
+    headerName: "Nombre de messages",
     width: 150,
     valueGetter: ({ row }) => row.messagesCount,
     renderCell: ({ row }) => {

@@ -46,43 +46,42 @@ const Stats = () => {
   const cards = useMemo(() => {
     return [
       {
-        title: "Deleted Users",
+        title: "Utilisateurs Supprimés",
         value: data.deletedUsers,
         icon: <User size={20} className="text-error" />,
       },
       {
-        title: "Total Chats",
+        title: "Chats Total",
         value: data.totalChats,
         icon: <MessageCircle size={20} className="text-success" />,
       },
       {
-        title: "Deleted Chats",
+        title: "Chats Supprimés",
         value: data.deletedChats,
         icon: <MessageCircle size={20} className="text-error" />,
       },
       {
-        title: "Total Messages",
+        title: "Messages Total",
         value: data.totalMessages,
         icon: <Mail size={20} className="text-success" />,
       },
       {
-        title: "Deleted Messages",
+        title: "Messages Supprimés",
         value: data.deletedMessages,
         icon: <Mail size={20} className="text-error" />,
       },
       {
-        title: "Liked Messages",
+        title: "Messages Aimés",
         value: data.messageReactions?.likeCount,
         icon: <ThumbsUp size={20} className="text-success" />,
       },
       {
-        title: "UnLiked Messages",
+        title: "Messages Pas Aimés",
         value: data.messageReactions?.dislikeCount,
-
         icon: <ThumbsDown size={20} className="text-error" />,
       },
       {
-        title: "Neutral Messages",
+        title: "Messages Neutres",
         value: data.messageReactions?.nullCount,
         icon: "-",
       },

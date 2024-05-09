@@ -169,8 +169,8 @@ const Sidebar = () => {
             onClick={handleNewChat}
             className="flex justify-between items-center w-full p-2 bg-gray-100 rounded-xl hover:shadow-lg transition-all ease-in duration-300"
           >
-            <span className="text-sm">New Chat</span>
-            <Tooltip title="New Chat" arrow>
+            <span className="text-sm">Nouveau Chat</span>
+            <Tooltip title="Nouveau Chat" arrow>
               <Edit size={14} />
             </Tooltip>
           </button>
