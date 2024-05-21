@@ -13,14 +13,17 @@ import {
   LogOut,
   User,
 } from "react-feather";
-import { toggleSidebar } from "../../../redux/slices/LayoutSlice";
+import { toggleSidebar, setLang } from "../../../redux/slices/LayoutSlice";
 import { hostName } from "../../../api/config";
 import ModalComponent from "../../Ui/ModalComponent";
 import Profile from "../../Users/Profile";
 import { resetChatSlice } from "../../../redux/slices/ChatSlice";
+import UK from "../../../assets/images/united-kingdom-flag-icon.svg";
+import AR from "../../../assets/images/saudi-arabia-flag-icon.svg";
+import FR from "../../../assets/images/france-flag-icon.svg";
 
 function Header() {
-  const { isOpen } = useSelector((state) => state.layout);
+  const { isOpen, lang } = useSelector((state) => state.layout);
   const [openProfile, setOpenProfile] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const { user } = useSelector((state) => state.auth);
@@ -29,7 +32,11 @@ function Header() {
     e.preventDefault();
     dispatch(resetChatSlice());
     dispatch(logout());
+    localStorage.clear();
     notyf.success("Vous avez été déconnecté avec succès.");
+  };
+  const getActiveLang = (l) => {
+    return l === lang;
   };
   return (
     <>
@@ -45,6 +52,28 @@ function Header() {
         </div>
         <div className="header-right">
           {/* <ToggleTheme /> */}
+          {user.role !== 305 && (
+            <div className="lang-container">
+              <div
+                className={`lang ${getActiveLang("eng") ? "active" : ""}`}
+                onClick={() => dispatch(setLang("eng"))}
+              >
+                <img src={UK} width={22} height={22} />
+              </div>
+              <div
+                className={`lang ${getActiveLang("fr") ? "active" : ""}`}
+                onClick={() => dispatch(setLang("fr"))}
+              >
+                <img src={FR} width={22} height={22} />
+              </div>
+              <div
+                className={`lang ${getActiveLang("ar") ? "active" : ""}`}
+                onClick={() => dispatch(setLang("ar"))}
+              >
+                <img src={AR} width={22} height={22} />
+              </div>
+            </div>
+          )}
           <div
             className="profile"
             onClick={() => setIsOpenDropdown(!isOpenDropdown)}

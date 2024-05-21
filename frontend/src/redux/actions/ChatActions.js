@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api, { createApiConfig } from "../../api/api";
 import { storeMessage } from "./UserActions";
 import axiosClient from "../../api/axiosClient";
+import { getLang } from "../../utils/getLang";
 
 export const getData = createAsyncThunk(
   "chat/getData",
@@ -10,11 +11,13 @@ export const getData = createAsyncThunk(
     const { prevMessages } = thunkAPI.getState().chat;
     const chatslice = thunkAPI.getState().chat;
     const API = createApiConfig();
+    const { lang } = thunkAPI.getState().layout;
     console.log("chatslice", chatslice);
     try {
       const response = await API.post(`POST/get_data/`, prevMessages, {
         params: {
           user_input: message,
+          langue: getLang(lang),
         },
       });
       console.log("response.data", response.data);

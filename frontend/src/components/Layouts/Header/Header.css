@@ -96,3 +96,21 @@
     margin-left: 250px;
   }
 }
+
+.lang-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.lang-container .lang {
+  border: 1px solid var(--muted-color);
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.lang-container .lang:hover,
+.lang-container .lang.active {
+  border-color: var(--primary-color);
+}
