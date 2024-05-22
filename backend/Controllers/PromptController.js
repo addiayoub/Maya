@@ -3,7 +3,8 @@ const Prompt = require("../Models/PromptModel");
 class _PromptController {
   async index(req, res) {
     try {
-      const prompts = await Prompt.find().select("id title isDefault");
+      const { lang } = req.query;
+      const prompts = await Prompt.find({ lang }).select("id title isDefault");
       return res.status(200).json({ prompts });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -42,7 +43,7 @@ class _PromptController {
 
   async storePrompts(req, res) {
     try {
-      const { titles } = req.body;
+      const { titles, lang } = req.body;
       if (!Array.isArray(titles)) {
         return res
           .status(400)
@@ -51,7 +52,7 @@ class _PromptController {
 
       // Add Prompts to DB
       const savedPrompts = await Prompt.create(
-        titles.map((title) => ({ title }))
+        titles.map((title) => ({ title, lang }))
       );
 
       res.status(201).json({

@@ -6,6 +6,10 @@ const promptSchem = new mongoose.Schema(
       required: [true, "le titre de prompt est obligatoire !"],
       trim: true,
     },
+    lang: {
+      type: String,
+      default: "fr",
+    },
     isDeleted: {
       type: Boolean,
       default: false,

@@ -21,6 +21,7 @@ import { resetChatSlice } from "../../../redux/slices/ChatSlice";
 import UK from "../../../assets/images/united-kingdom-flag-icon.svg";
 import AR from "../../../assets/images/saudi-arabia-flag-icon.svg";
 import FR from "../../../assets/images/france-flag-icon.svg";
+import Languages from "../../Languages";
 
 function Header() {
   const { isOpen, lang } = useSelector((state) => state.layout);
@@ -52,7 +53,8 @@ function Header() {
         </div>
         <div className="header-right">
           {/* <ToggleTheme /> */}
-          {user.role !== 305 && (
+          <Languages />
+          {/* {user.role !== 305 && (
             <div className="lang-container">
               <div
                 className={`lang ${getActiveLang("eng") ? "active" : ""}`}
@@ -73,7 +75,7 @@ function Header() {
                 <img src={AR} width={22} height={22} />
               </div>
             </div>
-          )}
+          )} */}
           <div
             className="profile"
             onClick={() => setIsOpenDropdown(!isOpenDropdown)}

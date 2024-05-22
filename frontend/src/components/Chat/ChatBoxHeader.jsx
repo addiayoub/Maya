@@ -37,6 +37,7 @@ const defaultMessages1 = [
 const ChatBoxHeader = () => {
   const [isShow, setIsShow] = useState(true);
   const { prompts, loading } = useSelector((state) => state.prompt);
+  const { lang } = useSelector((state) => state.layout);
   const defaultMessages = prompts.filter((prompt) => prompt.isDefault);
   console.log("defaultMessages are", defaultMessages);
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,15 +69,15 @@ const ChatBoxHeader = () => {
 
   // get prompts
   useEffect(() => {
-    if (!isInLocalStorage("prompts")) {
-      dispatch(getPrompts())
-        .unwrap()
-        .then((prompts) => {
-          // setRandomItems(prompts);
-          console.log("get prompts res", prompts);
-        });
-    }
-  }, []);
+    // if (!isInLocalStorage("prompts")) {
+    dispatch(getPrompts())
+      .unwrap()
+      .then((prompts) => {
+        // setRandomItems(prompts);
+        console.log("get prompts res", prompts);
+      });
+    // }
+  }, [lang]);
 
   useEffect(() => {
     setRandomItems(defaultMessages);

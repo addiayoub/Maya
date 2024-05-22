@@ -5,7 +5,10 @@ export const getPrompts = createAsyncThunk(
   "prompt/getPrompts",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosClient.get("/api/prompts/");
+      const { lang } = thunkAPI.getState().layout;
+      const response = await axiosClient.get("/api/prompts/", {
+        params: { lang },
+      });
       console.log("Prompts", response.data);
       localStorage.setItem("prompts", JSON.stringify(response.data.prompts));
       return response.data.prompts;
