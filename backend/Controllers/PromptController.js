@@ -12,7 +12,7 @@ class _PromptController {
   }
   async store(req, res) {
     try {
-      const { title, isDefault } = req.body;
+      const { title, isDefault, lang } = req.body;
       const prompts = await Prompt.find().select("id title");
       const exists = prompts.find(
         (prompt) => prompt.title.toLowerCase() === title.toLowerCase()
@@ -22,6 +22,7 @@ class _PromptController {
         const savedPrompt = await Prompt.create({
           title,
           isDefault,
+          lang,
         });
         res.status(201).json({
           message: "Prompt ajouté avec succès.",

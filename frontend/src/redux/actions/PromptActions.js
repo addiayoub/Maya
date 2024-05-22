@@ -23,7 +23,8 @@ export const setPrompt = createAsyncThunk(
   "prompt/setPrompt",
   async ({ title }, thunkAPI) => {
     try {
-      const response = await axiosClient.post("/api/prompts/", { title });
+      const { lang } = thunkAPI.getState().layout;
+      const response = await axiosClient.post("/api/prompts/", { title, lang });
       console.log("setPrompt Response", response.data);
       return response.data;
     } catch (error) {
