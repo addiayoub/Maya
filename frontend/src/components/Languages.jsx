@@ -4,6 +4,8 @@ import { Select, InputLabel, FormControl, MenuItem } from "@mui/material";
 import ENG from "../assets/images/united-kingdom-flag-icon.svg";
 import AR from "../assets/images/saudi-arabia-flag-icon.svg";
 import FR from "../assets/images/france-flag-icon.svg";
+import Mar from "../assets/images/Maroc.svg";
+import Ita from "../assets/images/italie.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { setLang } from "../redux/slices/LayoutSlice";
 
@@ -25,6 +27,18 @@ const countries = [
     src: ENG,
     link: " ",
     value: "eng",
+  },
+  {
+    label: "Italie",
+    src: Ita,
+    link: " ",
+    value: "it",
+  },
+  {
+    label: "Maroc",
+    src: Mar,
+    link: " ",
+    value: "darija",
   },
 ];
 const useStyles = makeStyles((theme) => ({

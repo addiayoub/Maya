@@ -3,6 +3,10 @@ export const getLang = (choice) => {
     fr: "français",
     ar: "arabe",
     eng: "anglais",
+    it:"italian",
+    darija:"Darija"
+
+
   };
   return langs[choice] ?? "français";
 };
